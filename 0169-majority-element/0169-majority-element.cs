@@ -1,25 +1,29 @@
 public class Solution {
     public int MajorityElement(int[] nums) {
-        Dictionary<int,int> d1=new Dictionary<int, int>();
-int n = nums.Length;
-for(int i=0;i<n; i++) {
-    if (d1.ContainsKey(nums[i]))
-    {
-        d1[nums[i]]++;
-    }
-    else
-    {
-        d1[nums[i]] = 1;
-    }
-}
-
-foreach(KeyValuePair<int,int> entry in d1)
-{
-    if (entry.Value > n / 2)
-    {
-        return entry.Key;
-    }
-}
-return -1;
+        int n=nums.Length;
+        int cnt=0;
+        int ele=0;
+        for(int i=0;i<n;i++){
+            if(cnt==0){
+                cnt=1;
+                ele=nums[i];
+            }
+            else if(ele==nums[i]){
+                cnt++;
+            }
+            else{
+                cnt--;
+            }
+        }
+        int cnt1=0;
+        for(int i=0;i<n;i++){
+            if(ele==nums[i]){
+                cnt1++;
+            }
+        }
+        if(cnt1>(n/2)){
+            return ele;
+        }
+        return -1;
     }
 }
