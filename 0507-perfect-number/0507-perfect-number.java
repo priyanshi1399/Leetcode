@@ -3,15 +3,17 @@ class Solution {
         if(num==1){
             return false;
         }
-        int sum=0;
-        for(int i=1;i<=num/2;i++){
+        int sum=1; //1 will always be there
+        for(int i=2;i*i<=num;i++) //can use Math.sqrt() but it will take some more time than this
+        {
             if(num%i==0){
                 sum=sum+i;
+                if(i!=(num/i)){
+                    sum=sum+(num/i);
+                }
             }
         }
-        if(sum==num){
-            return true;
-        }
-        return false;
+        return (sum==num);
+
     }
 }
