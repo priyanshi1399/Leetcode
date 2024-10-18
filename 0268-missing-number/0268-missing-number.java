@@ -1,6 +1,6 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        int n=nums.length;
+       /* int n=nums.length;
         Arrays.sort(nums);
         int result=nums.length;
         int l=0;
@@ -20,6 +20,29 @@ class Solution {
         }
         
     }
-    return result;
+    return result;*/
+
+  
+
+
+    //Approach-2
+
+      /* int n=nums.length; 
+        int result=n; //storing length    //XOR of same number will be zero 
+        for(int i=0;i<n;i++){
+            result=result^i;
+            result=result^nums[i];
+        }
+        return result;
+*/
+
+int n = nums.length;
+        int sum = n * (n + 1) / 2;
+        for (int i = 0; i < n; i++) {
+            sum -= nums[i];
+        }
+        return sum;
+
+
 }
 }
