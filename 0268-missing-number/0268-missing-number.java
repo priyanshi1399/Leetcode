@@ -1,22 +1,12 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        /*Arrays.sort(nums);
-        int n=nums.length;
-        for(int i=0;i<nums.length;i++){
-            if(i==nums[i]){
-                continue;
-            }
-            else{
-                return i;
-            }
+        int n=nums.length; 
+        int result=n; //storing length
+    //XOR of same number will be zero 
+        for(int i=0;i<n;i++){
+            result=result^i;
+            result=result^nums[i];
         }
-      
-    return n;*/
-    int n=nums.length;
-    int sum=(n*(n+1))/2;
-    for(int i=0;i<n;i++){
-        sum=sum-nums[i];
-    }
-    return sum; //It is in TimeComplexity of o(n).
+        return result;
     }
 }
