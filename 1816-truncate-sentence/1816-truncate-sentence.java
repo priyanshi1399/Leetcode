@@ -1,6 +1,6 @@
 class Solution {
     public String truncateSentence(String s, int k) {
-        String [] ch=s.split(" ");
+       /* String [] ch=s.split(" ");
         StringBuilder s1=new StringBuilder();
         for(int i=0;i<k;i++){
             s1.append(ch[i]);
@@ -8,9 +8,9 @@ class Solution {
                 s1.append(" ");
             }           
         }
-        return s1.toString();
+        return s1.toString();*/
     
-       /* int count=0;
+       int count=0;
         for(int i=0;i<s.length();i++){
             if(s.charAt(i)==' '){
                 count++;
@@ -19,7 +19,7 @@ class Solution {
                 }
             }
         }
-        return s;*/
+        return s;
     
     }
 }
