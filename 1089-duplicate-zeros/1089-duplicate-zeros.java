@@ -19,5 +19,26 @@ class Solution {
             i++;
         }
         }
-    }
+        }
+        
+
+       /* public void duplicateZeros(int[] arr) {
+            int n=arr.length;
+            ArrayList<Integer> duplicate =new ArrayList<>();
+            for(int i=0;i<arr.length;i++){
+                duplicate.add(arr[i]);
+            }
+
+            for(int i=0;i<duplicate.size();i++){
+                if(duplicate.get(i)==0){
+                    duplicate.add(i+1,0);
+                    i++;
+                }
+            }
+
+            for(int i=0;i<arr.length;i++){
+                arr[i]=duplicate.get(i);
+            }
+        }*/
+    
 }
