@@ -1,14 +1,15 @@
+//repeat in HashMap
 class Solution {
     public boolean isAnagram(String s, String t) {
-        if(s.length()!=t.length()){
+        if(s.length()!=t.length()){ //o(n)
             return false;
         }
-        char [] s1=s.toCharArray();
-        char [] t1=t.toCharArray();
+        char [] s1=s.toCharArray(); //o(n)
+        char [] t1=t.toCharArray(); //o(n)
 
-        Arrays.sort(s1);
-        Arrays.sort(t1);
-        return Arrays.equals(s1,t1);
+        Arrays.sort(s1); //(nlogn)
+        Arrays.sort(t1); //(nlogn)
+        return Arrays.equals(s1,t1); //o(n)
 
         /*if(s.length()!=t.length()){
             return false; //base case
