@@ -1,15 +1,6 @@
 class Solution {
 
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-     /*for(int i=n-1;i>=0;i--){
-        if(nums2[i]>nums[i]){
-            nums1[n+i]=nums2[i];
-        }
-        else{
-
-        }
-     }
-*/
     int i=m-1, j=n-1,k=m+n-1;
     while(i>=0 && j>=0){
         if(nums1[i]<nums2[j]){
@@ -19,12 +10,12 @@ class Solution {
             nums1[k--]=nums1[i--];
         }
     }
-    // while(i>=0){
-    //     nums1[k--]=nums1[i--];
-    // }
+    while(i>=0){
+        nums1[k--]=nums1[i--];
+    }
     while(j>=0){
         nums1[k--]=nums2[j--];
-    }
+    } // this must for nums1=[4,5,6,0,0,0] ,nums2=[1,2,3] these types of cases
      //[1,2,3(i),0,0,0(k)]
      //[2,5,6(j)]
 
