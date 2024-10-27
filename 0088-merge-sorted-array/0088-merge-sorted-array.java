@@ -1,6 +1,42 @@
 class Solution {
 
-    public void swapIfGreater(int[] nums1,int[] nums2, int idx1,int idx2){
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+     /*for(int i=n-1;i>=0;i--){
+        if(nums2[i]>nums[i]){
+            nums1[n+i]=nums2[i];
+        }
+        else{
+
+        }
+     }
+*/
+    int i=m-1, j=n-1,k=m+n-1;
+    while(i>=0 && j>=0){
+        if(nums1[i]<nums2[j]){
+            nums1[k--]=nums2[j--];
+        }
+        else{
+            nums1[k--]=nums1[i--];
+        }
+    }
+    // while(i>=0){
+    //     nums1[k--]=nums1[i--];
+    // }
+    while(j>=0){
+        nums1[k--]=nums2[j--];
+    }
+     //[1,2,3(i),0,0,0(k)]
+     //[2,5,6(j)]
+
+    //[1,2,3(i),0,0(k),0]
+     //[2,5(j),6]
+
+      //[1,2,3(i),0,0(k),0]
+     //[2,5(j),6]
+
+
+
+    /*public void swapIfGreater(int[] nums1,int[] nums2, int idx1,int idx2){
         if(nums1[idx1]>nums2[idx2]){
             int temp=nums1[idx1];
             nums1[idx1]=nums2[idx2];
@@ -40,7 +76,8 @@ class Solution {
         //copy the elements of nums2 to nums1
         for(int i=m;i<m+n;i++){
             nums1[i]=nums2[i-m]; //m=3 then 3-3 nums1[3]=0,....like this
-        } //T(C)--->0(log2(m+n))*0(n+m) S(C)->0(1)
+        }*/
+         //T(C)--->0(log2(m+n))*0(n+m) S(C)->0(1)
        /* int [] arr=new int[n+m];
         int left=0;
         int right=0;
