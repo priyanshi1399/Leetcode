@@ -1,5 +1,49 @@
 class Solution {
     public int missingNumber(int[] nums) {
+        //first find sum of all numbers from 0 to n
+      /*  int n=nums.length;
+        int sum=(n*(n+1))/2;
+        int arraySum=0;
+        for(int i=0;i<n;i++){
+            arraySum=arraySum+nums[i];
+        }
+        //arraySum-sum of all numbers from 0 to n except missing
+        return sum-arraySum;*/
+
+       /* int ans=nums.length;
+        for(int i=0;i<nums.length;i++){
+            ans=ans^nums[i]^i;
+        }
+        return ans;*/
+        // for(int i=0;i<nums.length;i++){
+        //     ans=ans^nums[i];
+        // }
+        // for(int i=1;i<n;i++){
+        //     ans=ans^i;
+        // }
+       /*int ans=0;
+       for(int i=0;i<nums.length;i++){
+        ans=ans^nums[i]^(i+1);
+       }
+       return ans;
+*/
+
+//by using Binary Search
+    int n =nums.length;
+    Arrays.sort(nums);
+    int l=0;
+    int h=n;
+    while(l<h){
+        int mid=l+(h-l)/2;
+        if(nums[mid]<=mid){
+            l=mid+1;
+        }
+        else{
+            h=mid;
+        }
+    }
+    return l;
+
        /* int n=nums.length;
         Arrays.sort(nums);
         int result=nums.length;
@@ -25,6 +69,7 @@ class Solution {
   
 
 
+
     //Approach-2
 
       /* int n=nums.length; 
@@ -36,13 +81,25 @@ class Solution {
         return result;
 */
 
-int n = nums.length;
+/*int n = nums.length;
         int sum = n * (n + 1) / 2;
         for (int i = 0; i < n; i++) {
             sum -= nums[i];
         }
-        return sum;
+        return sum;*/
 
 
 }
 }
+/**
+[3,0,1,4,5]-->original array
+[0,1,2,3,4,5]-->[0-n]elements
+3^0^1^4^5^0^1^2^3^4^5=2
+remove 0 as it is 0
+
+[3,0,1,4,5]
+[1,2,3,4,5]
+
+3^1^4^5^1^2^3^4^5=2
+
+ */
