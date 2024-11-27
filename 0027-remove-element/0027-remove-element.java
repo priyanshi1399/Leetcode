@@ -7,7 +7,20 @@ class Solution {
                 nums[k]=nums[i];
                 k++;
             }
+            else{
+                continue;
+            }
         }
         return k;
+
+       /* int k=0;
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            if(nums[i]!=val){
+                nums[k]=nums[i];
+                k++;
+            }
+        }
+        return k;*/
     }
 }
