@@ -27,6 +27,40 @@ class Solution {
                     k=4 here if you decrease k then same value so jab tak same tab tak decraese aur increase
                     */
                     //this is for duplicates
+                    /*
+                        0  1  2  3 4  5
+                        -4 -1 -1 0 1 2 
+                        i=0 j=1 k=5
+                        nums[i]+nums[j]+nums[k]=
+                        -4-1+2=-3<0 sum maximize
+                        j++;
+                        -4-1+2=-3<0
+                        j++;
+                        -4+0+2=-2<0 maximize
+                        j++; j=4
+                        -4+1+2=-1<0 maximize
+                        j++;j==5,k=5 wrong
+                        -4 -1 -1 0 1 2 
+                        i=1;j=2;k=5
+                        -1-1+2=0  ans=[[-1,-1,2]]
+                        j++; k--;
+                        i=1;j=3;k=4
+                        -1+0+1=0   ans=[[-1,-1,2],[-1,0,1]]
+                        0  1   2 3 4 5
+                        -4 -1 -1 0 1 2   ; n=6 ;n-3=3
+                        j++; k--;
+                        i=1 ;j=4 ;k=3 
+                         0  1  2 3 4 5
+                        -4 -1 -1 0 1 2  
+                        //here we are wrong because at i=1, i=2 there is -1 so it will skip duplicate i++;
+                        i=2;j=3;k=5
+                        -1+0+2=1>0 k--;
+                        i=2;j=3;k=4
+                        -1+0+1=0; it will not add
+                        i=3;j=4;k=5
+                        3>0 k--;
+                        i=3 ;j=4;k=4 out of the loop
+                    */
                 }
                 j++;
                 k--;
@@ -75,3 +109,7 @@ nums[i]+nums[j]+nums[k]=7
 k=4
 i=4
 */
+
+
+
+
