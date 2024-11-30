@@ -1,5 +1,29 @@
 class Solution {
-    public boolean isPowerOfTwo(int n) {  
+    public boolean isPowerOfTwo(int n) { 
+        System.out.println(n);
+        if(n==0){
+            return false; // because stack overflow for 0 so directly return false
+        }
+        if(n==1){
+            return true;
+        }
+        if(n%2!=0){
+            return false;
+        }
+        else{
+            return isPowerOfTwo(n/2);
+        }
+        /*if(n==0){
+            return false;
+        } 
+        if(n==1 || n==2){
+            return true;
+        }
+        if(n%2!=0){
+            return false;
+        }
+        return isPowerOfTwo(n/2);*/
+
         /*if(n<=0)
             return false;     
        return (n &(n-1))==0; //it will return true
@@ -19,7 +43,7 @@ class Solution {
 
 //2nd Method
 
-    if(n<=0)
+    /*if(n<=0)
         return false;
     while(n>0){
         if(n==1) //n==3
@@ -29,8 +53,9 @@ class Solution {
         n=n/2;
     }
     return false;
-    }
+    }*/
 
     //16--8-->4-->2-->1
    // 3-->
+}
 }
