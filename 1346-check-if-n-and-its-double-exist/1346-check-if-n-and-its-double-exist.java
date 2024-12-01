@@ -1,7 +1,38 @@
 class Solution {
-    public boolean checkIfExist(int[] arr) {
 
-        HashMap<Integer,Integer> map=new HashMap<>();
+    private int customBinarySearch(int [] arr,int target){
+        int n=arr.length;
+        int l=0;
+        int r=n-1;
+
+        while(l<=r){
+            int mid=l+(r-l)/2;
+            if(arr[mid]==target){
+                return mid;
+            }
+            else if(arr[mid]>target){
+                r=mid-1;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        return -1;
+    }
+
+    public boolean checkIfExist(int[] arr) {
+        Arrays.sort(arr);
+        for(int i=0;i<arr.length;i++){
+            int j=customBinarySearch(arr,2*arr[i]);      
+            if(j!=-1 && j!=i){
+                return true;
+            }     
+        }
+        return false;
+
+
+
+       /* HashMap<Integer,Integer> map=new HashMap<>();
         for(int i=0;i<arr.length;i++){
             if(map.containsKey(arr[i]*2)){
                 return true;
@@ -16,7 +47,7 @@ class Solution {
         for(Map.Entry<Integer,Integer> entry:map.entrySet()){
             System.out.println(entry.getKey() + ":"+ entry.getValue());
         }
-        return false;
+        return false;*/
 
        /* int n=arr.length;
         int i=0;
