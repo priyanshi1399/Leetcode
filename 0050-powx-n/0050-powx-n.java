@@ -15,7 +15,7 @@ class Solution {
     public double myPow(double x, int n) {
         double ans=1;
         long nn=n;
-        if(n<0){
+        if(nn<0){
 
             return ans/Power(x,-nn); //niche jake power positive me kar k result 2^-3==>1/8
         }
