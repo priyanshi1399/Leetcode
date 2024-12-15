@@ -8,7 +8,14 @@ class MyQueue {
 
     }
     /*
-
+     q=[1,2,3]
+     s=[3,2,1(top)]
+     Lets say we need to add 4
+     q=[(front)1,2,3,4(back)]
+    s=[3,2,1]--should look like
+    auxiliarystack=[1,2,3(top)]
+    a=[4]
+    a=[4,3,2,1(top)]
 
 
     */
