@@ -1,6 +1,6 @@
 class Solution {
     public int countGoodSubstrings(String s) {
-        if(s.length()<3){
+        /*if(s.length()<3){
             return 0;
         }
        HashMap<Character,Integer> map=new HashMap<>();
@@ -28,7 +28,35 @@ class Solution {
         }
        
        }
-       return subCount;
+       return subCount;*/
+
+    //Another Approach
+    int [] freq=new int[26];
+    int dup=0;
+    int count=0;
+    for(int i=0;i<s.length();i++){
+
+        freq[s.charAt(i)-'a']++;
+
+        if(freq[s.charAt(i)-'a']==2){
+            dup++;
+        }
+        if(i<2){
+            continue;
+        }
+
+        if(dup==0){
+            count++;
+        }
+
+        freq[s.charAt(i-2)-'a']--;
+
+        if(freq[s.charAt(i-2)-'a']==1){
+            dup--;
+        }
+    }
+    return count;
+
 
         /*HashMap<Character,Integer> map=new HashMap<>();
         int count=0;
