@@ -1,7 +1,20 @@
 class Solution {
-    public int[] nextGreaterElements(int[] nums) {
 
+        public int[] nextGreaterElements(int[] nums) {
         int n=nums.length;
+        int res[] =new int[n];
+        Arrays.fill(res,-1);
+        Stack<Integer> s=new Stack<>();
+        for(int i=0;i<2*n;i++){
+            while(!s.isEmpty() && nums[i%n]>nums[s.peek()]){
+                res[s.pop()]=nums[i%n];
+            }
+            s.push(i%n);
+        }
+        return res;
+    
+
+       /* int n=nums.length;
 
         int [] res=new int[n];
         Stack<Integer> stck=new Stack<>();
@@ -19,7 +32,7 @@ class Solution {
 
         } 
 
-       return res;
+       return res;*/
 
 
        /* int n=nums.length;
