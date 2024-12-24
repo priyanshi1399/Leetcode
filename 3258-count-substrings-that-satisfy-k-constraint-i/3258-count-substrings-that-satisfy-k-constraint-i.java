@@ -1,6 +1,40 @@
 class Solution {
 
-    public int countNumberOfOnes(String s){
+
+
+     public int countKConstraintSubstrings(String s, int k) {
+        int left=0;
+        int right=0;
+        int zeroes=0;
+        int ones=0;
+        int count=0;
+
+        while(right<s.length()){
+            if(s.charAt(right)=='0'){
+                zeroes++;
+            }
+            else{
+                ones++;
+            }
+
+            while(zeroes>k && ones>k){
+                if(s.charAt(left)=='0'){
+                    zeroes--;
+                }
+                else{
+                    ones--;
+                }
+                left++;
+            }
+
+            count=count+(right-left+1); //count all the substring
+            right++;
+        }
+        return count;
+     }
+}
+
+   /* public int countNumberOfOnes(String s){
         int count1=0;
         for(int i=0;i<s.length();i++){
         if(s.charAt(i)=='1'){
@@ -34,3 +68,4 @@ class Solution {
         return count;
     }
 }
+*/
