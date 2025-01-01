@@ -1,8 +1,28 @@
 class Solution {
 
+    int zeroes=0;
+    int ones=0;
+    int maxCount=Integer.MIN_VALUE;
+    public int maxScore(String s) {
+        int n=s.length();
+        for(int i=0;i<n-1;i++){
+            if(s.charAt(i)=='0'){
+                zeroes++;
+            }
+            else{
+                ones++;
+            }
 
+            maxCount=Math.max(maxCount,(zeroes-ones));
+        }
+        if(s.charAt(n-1)=='1'){
+            ones++;
+        }
+        return maxCount+ones;
+    }
+}
 
- public int maxScore(String s) {
+ /*public int maxScore(String s) {
     int n=s.length();
     int totalOnes=0;
     for(int i=0;i<n;i++){
@@ -30,7 +50,7 @@ class Solution {
     return maxCount;
 
 }
-}
+}*/
 
 
    /* public int countZeros(String str){
