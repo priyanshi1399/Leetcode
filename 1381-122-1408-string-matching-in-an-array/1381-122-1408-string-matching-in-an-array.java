@@ -14,6 +14,7 @@ class Solution {
                     len=LPS[len-1];
                 }
                 else{
+                    LPS[i]=0;
                     i++;
                 }
             }
