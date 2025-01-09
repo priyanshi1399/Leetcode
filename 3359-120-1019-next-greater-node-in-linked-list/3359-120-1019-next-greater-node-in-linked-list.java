@@ -9,7 +9,42 @@
  * }
  */
 class Solution {
-    public int[] nextLargerNodes(ListNode head) {
+
+     public int[] nextLargerNodes(ListNode head) {
+        ListNode temp=head;
+        List<Integer> res=new ArrayList<>();
+        while(temp!=null){
+            ListNode search=temp.next;
+            int value=searchNextElement(search,temp.val);
+            if(value==temp.val){
+                res.add(0);
+            }
+            else{
+                res.add(value);
+            }
+            temp=temp.next;
+        }
+        int [] ans=new int[res.size()];
+        for(int i=0;i<ans.length;i++){
+            ans[i]=res.get(i);
+        }
+        return ans;
+     }
+
+
+     public int searchNextElement(ListNode head, int maxValue){
+        ListNode temp=head;
+        while(temp!=null){
+            if(temp.val>maxValue){
+                maxValue=temp.val;
+                break;
+            }
+            temp=temp.next;
+        }
+        return maxValue;
+     }
+}
+   /* public int[] nextLargerNodes(ListNode head) {
         ListNode temp=head;
         List<Integer> lst=new ArrayList<>();
         while(temp!=null){
@@ -28,4 +63,4 @@ class Solution {
         }
         return res;
     }
-}
+}*/
