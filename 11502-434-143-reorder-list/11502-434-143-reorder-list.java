@@ -71,7 +71,7 @@ class Solution {
     ListNode first=head; //1-->2-->3-->4-->5
     ListNode second=prev; //8-->7-->6-->5
 
-    while(second!=null && second.next!=null) //because it will get null fast
+    while(second.next!=null) //because it will get null fast
     {
         ListNode temp1=first.next;
         ListNode temp2=second.next;
