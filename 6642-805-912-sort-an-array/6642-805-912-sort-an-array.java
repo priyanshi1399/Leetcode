@@ -15,13 +15,13 @@ class Solution {
 
         private void merge(int [] nums,int l,int mid,int h){
 
-            int n1=mid-l+1;
+            int n1=mid-l+1; //first array will have l to mid elements
             int [] a=new int[n1];
             for(int i=0;i<n1;i++){
                 a[i]=nums[l+i];
             }
 
-            int n2=h-mid;
+            int n2=h-mid; //second array having n2 elements  that is mid+1 to h
             int [] b=new int[n2];
              for(int i=0;i<n2;i++){
                 b[i]=nums[mid+1+i];
