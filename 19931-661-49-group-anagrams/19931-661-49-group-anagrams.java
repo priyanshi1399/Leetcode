@@ -1,42 +1,38 @@
 class Solution {
-
-    
-       
-    public List<List<String>> groupAnagrams(String[] strs) {
-        HashMap<String, List<String>> map=new HashMap<>();
-        for(String s: strs){
-            char [] ch=s.toCharArray();
-            Arrays.sort(ch);
-
-            String newSorted=new String(ch);
-
-            if(!map.containsKey(newSorted)){
-            map.put(newSorted,new ArrayList<>());
-            }
-            map.get(newSorted).add(s);
+    public String letterConcatenate(int frequency, char ch){
+        String appended="";
+        for(int i=0;i<frequency;i++){
+            appended=appended+ch;
         }
-
-        List<List<String>> ans= new ArrayList<>();
-        for(Map.Entry<String, List<String>> entry:map.entrySet()){
-            ans.add(entry.getValue());
-        }
-        return ans;
+        return appended;
     }
-}
-/*
- HashMap<String, List<String>> map=new HashMap<>();
-        for(String s: strs){
-            char [] ch=s.toCharArray();
-            Arrays.sort(ch);
 
-            String newSorted=new String(ch);
-
-            if(!map.containsKey(newSorted)){
-            map.put(newSorted,new ArrayList<>());
+    public  String appendAfterCounting(String str){
+        int [] arr=new int[26];
+        for(int i=0;i<str.length();i++){
+            arr[str.charAt(i)-'a']++;
+        }
+        StringBuilder builder=new StringBuilder();
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]!=0){
+            String appended= letterConcatenate(arr[i],(char)(i+'a'));
+            builder.append(appended);
             }
-            map.get(newSorted).add(s);
+        }
+        return builder.toString();       
+
+    }
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String,List<String>> map=new HashMap<>();
+        for(String s: strs){
+        String newString= appendAfterCounting(s);
+
+        if(!map.containsKey(newString)){
+            map.put(newString,new ArrayList<>());
+        }
+        map.get(newString).add(s);
         }
 
         return new ArrayList<>(map.values());
     }
-}*/
+}
