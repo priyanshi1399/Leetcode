@@ -1,5 +1,39 @@
 class Solution {
-    public boolean isSetBit(int num,int bit){
+
+    public boolean isSetBit(int number, int bit){
+        return ((number & (1<<bit))!=0);
+    }
+
+    public int minimizeXor(int num1, int num2) {
+        int x=0;
+        int requiredBitCount=Integer.bitCount(num2);
+        for(int bit=31;bit>=0;bit--){
+            if(isSetBit(num1,bit)){
+                x=x|(1<<bit);
+                requiredBitCount--;
+                System.out.println(requiredBitCount);
+                if(requiredBitCount==0){
+                    return x;
+                }
+            }
+        }
+        
+        for(int bit=0;bit<32;bit++){
+            if(!isSetBit(num1,bit)){
+                x=x|(1<<bit);
+                requiredBitCount--;
+                if(requiredBitCount==0){
+                    break;
+                }
+            }
+        }
+        
+        
+        return x;
+    }
+}
+
+    /*public boolean isSetBit(int num,int bit){
         return ((num & (1<<bit))!=0);
     }
 
@@ -36,7 +70,7 @@ class Solution {
             }
         }    
         //if the bit count are equal then  you acn return  num1 which is x;
-        return x;
+        return x; 
         
     }
-}
+}*/
