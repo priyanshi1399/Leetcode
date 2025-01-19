@@ -10,3 +10,12 @@ class Solution {
         return decodeArray;
     }
 }
+
+/*
+encoded[i]=arr[i]^arr[i+1]
+encoded[0]=arr[0]^arr[i];
+encoded[0]^arr[0]= arr[0]^arr[0]^arr[i]; //Xored by arr[0] on both sides
+encoded[0]^arr[0]=arr[i];
+
+
+*/
