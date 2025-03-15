@@ -18,22 +18,20 @@ class Solution {
         if(root==null){
             return;
         }
-        Stack<TreeNode> stck=new Stack<>();
-        stck.push(root);
-        while(!stck.isEmpty()){
-            TreeNode curr=stck.peek();
-            stck.pop();
-            if(curr.right!=null){
-                stck.push(curr.right);
-            }
-            if(curr.left!=null){
-                stck.push(curr.left);
-            }
 
-            if(!stck.isEmpty()){
-                curr.right=stck.peek();
-            }
+        TreeNode curr=root;
+        while(curr!=null){
+
+            if(curr.left!=null){
+                TreeNode prev=curr.left;
+                while(prev.right!=null){
+                    prev=prev.right;
+                }
+            prev.right=curr.right;    
+            curr.right=curr.left;
             curr.left=null;
+            }
+            curr=curr.right;
         }
 
     }
