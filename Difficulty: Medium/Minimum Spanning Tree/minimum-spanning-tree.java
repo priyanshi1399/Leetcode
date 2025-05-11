@@ -39,32 +39,71 @@ public class Main {
 // User function Template for Java
 
 class Solution {
+    public static int  find(int x,int [] parent){
+        if(x==parent[x]){
+            return x;
+        }
+        return parent[x]=find(parent[x],parent);
+    }
+    
+    public static void union(int x,int y, int [] parent, int [] rank){
+        int x_Parent=find(x,parent);
+        int y_Parent=find(y,parent);
+        
+        if(x_Parent==y_Parent){
+            return;
+        }
+        
+        else if (rank[x_Parent]> rank[y_Parent]){
+            parent[y_Parent]=x_Parent;
+        }
+           
+        else if (rank[y_Parent]> rank[x_Parent]){
+            parent[x_Parent]=y_Parent;
+        }
+        else{
+            parent[y_Parent]=x_Parent;
+            rank[x_Parent]++;
+        }
+        
+    }
+    public static int krushkal(List<int[]> edges,int [] parent, int [] rank){
+        int sum=0;
+        
+        for(int [] edge:edges){
+            int u=edge[0];
+            int v=edge[1];
+            int wt=edge[2];
+            
+            int parentU=find(u,parent);
+            int parentV=find(v,parent);
+            if(parentU!=parentV){
+                union(u,v,parent,rank);
+                sum+=wt;
+            }
+        }
+        return sum;
+    }
     static int spanningTree(int V, int E, List<List<int[]>> adj) {
-      boolean [] vis=new boolean[V];
-      int sum=0;
-      PriorityQueue<int []> pq=new PriorityQueue<>(Comparator.comparingInt(a->a[0]));
-      pq.add(new int[]{0,0});
-      
-      while(!pq.isEmpty()){
-          int [] curr=pq.poll();
-          int wt=curr[0];
-          int node=curr[1];
-          if(!vis[node]){
-              sum+=wt;
-              vis[node]=true;
-              for(int [] v: adj.get(node)){
-                  int adjNode=v[0];
-                  int w=v[1];
-                  
-                  if(!vis[adjNode]){
-                      pq.add(new int []{w,adjNode});
-                  }
-                  
-              }
-          }
-          
-          
-      }
-      return sum;
+        int [] parent=new int[V];
+        int [] rank=new int[V];
+        
+        for(int i=0;i<V;i++){
+            parent[i]=i;
+        }
+        List<int[]> edges=new ArrayList<>();
+        
+        for(int i=0;i<V;i++){
+            for(int [] temp: adj.get(i)){
+                int u=i;
+                int v=temp[0];
+                int wt=temp[1];
+                edges.add(new int []{u,v,wt});
+            }
+        }
+        
+        edges.sort((a,b)->Integer.compare(a[2],b[2])); //sort according to wt
+        
+        return krushkal(edges,parent,rank);
     }
 }
