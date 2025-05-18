@@ -29,11 +29,12 @@ class GFG {
 
 
 class Solution {
-    public boolean isCycleDFS(int u,boolean[] visited, HashMap<Integer,ArrayList<Integer>> adj,int parent,int V){
+    public boolean isCycleDFS(int u, List<List<Integer>> adj, boolean [] visited,int parent){
         visited[u]=true;
         
-        for(int v:adj.getOrDefault(u,new ArrayList<>())){
-            if(parent==v){
+        for(int v:adj.get(u)){
+            
+            if(v==parent){
                 continue;
             }
             
@@ -41,30 +42,29 @@ class Solution {
                 return true;
             }
             
-               if(isCycleDFS(v,visited,adj,u,V)){
-                    return true;
-                }
-                }
-            return false;
-        }
-    public boolean isCycle(int V, int[][] edges) {
-        HashMap<Integer,ArrayList<Integer>> adj=new HashMap<>();
-    
-        for(int [] edge:edges){
-            int u=edge[0];
-            int v=edge[1];
-            
-            adj.computeIfAbsent(u,k->new ArrayList<>()).add(v);
-            adj.computeIfAbsent(v,k->new ArrayList<>()).add(u);
-            
-        }
-        boolean [] visited=new boolean[V];
-        for(int i=0;i<V;i++){
-            if(!visited[i] && isCycleDFS(i,visited,adj,-1,V)){
+            if(isCycleDFS(v,adj,visited,u)){
                 return true;
             }
         }
         return false;
+    }
+    public boolean isCycle(int V, int[][] edges) {
+        List<List<Integer>> adj=new ArrayList<>();
+        for(int i=0;i<V;i++){
+            adj.add(i,new ArrayList<>());
+        }
         
+        for(int [] edge:edges){
+            adj.get(edge[0]).add(edge[1]);
+            adj.get(edge[1]).add(edge[0]);
+        }
+        
+        boolean [] vis=new boolean[V];
+        for(int u=0;u<V;u++){
+           if(!vis[u] && isCycleDFS(u,adj,vis,-1)){
+               return true;
+           }
+        }
+        return false;
     }
 }
