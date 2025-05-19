@@ -26,50 +26,45 @@ class GFG {
 
 
 class Solution {
-    public boolean isCyclic(int V, int[][] edges) {
-        ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
-        for(int i=0;i<V;i++){
-            adj.add(new ArrayList<>());
-        }
+    public boolean isCycleDFS(int u,   List<List<Integer>> adj, boolean [] visited, boolean [] inRecursion ){
+        visited[u]=true;
+        inRecursion[u]=true;
         
-        for(int [] edge:edges){
-            adj.get(edge[0]).add(edge[1]);
-        }
-        
-        int [] indegree=new int[V];
-        for(int u=0;u<V;u++){
-            for(int v:adj.get(u)){
-                indegree[v]++;
-            }
-        }
-        int count=0;
-        Queue<Integer> q=new LinkedList<>();
-        for(int i=0;i<V;i++){
-            if(indegree[i]==0){
-                q.add(i);
-                count++;
-            }
-        }
-        
-        while(!q.isEmpty()){
-            
-            int u=q.peek();
-            q.poll();
-            
-            for(int v: adj.get(u)){
-                indegree[v]--;
-                if(indegree[v]==0){
-                    q.add(v);
-                    count++;
+        for(int v:adj.get(u)){
+             if((!visited[v]) && (isCycleDFS(v,adj,visited,inRecursion))){
+                    return true;
                 }
+
+            if(inRecursion[v]==true){
+                return true;
             }
-        }
+        }   
+           
+            inRecursion[u]=false;
+              return false;
+      
+    }
+    public boolean isCyclic(int V, int[][] edges) {
         
-        if(count==V){
-            return false;
+    List<List<Integer>> adj=new ArrayList<>();
+    for(int i=0;i<V;i++){
+        adj.add(new ArrayList<>());
+    }
+    
+    
+    for(int [] edge:edges){
+        adj.get(edge[0]).add(edge[1]);
+    }
+    
+    boolean [] visited=new boolean[V];
+    boolean [] inRecursion =new boolean[V];
+    
+    for(int i=0;i<V;i++){
+        if(!visited[i] && isCycleDFS(i,adj,visited,inRecursion)){
+            return true;
         }
-        return true;
-        
+    }
+    return false;
         
     }
 }
