@@ -8,11 +8,11 @@ class Solution {
         }
 
     
-        boolean take=solve(idx+1,n,nums,target,prod1*nums[idx],prod2);
+        boolean left=solve(idx+1,n,nums,target,prod1*nums[idx],prod2);
 
-        boolean not_take=solve(idx+1,n,nums,target,prod1,prod2*nums[idx]);
+        boolean right=solve(idx+1,n,nums,target,prod1,prod2*nums[idx]);
 
-        return take|| not_take;
+        return left|| right;
     }
  
     public boolean checkEqualPartitions(int[] nums, long target) {
