@@ -15,17 +15,17 @@ class Solution {
                 candy+=peak;
                 i++;
                 if(i==n){
-                    return candy;
+                    return candy;  //here no need to remove extra because no extra added
                 }
             }
             int dip=0;
             while(i<n && ratings[i]<ratings[i-1]){
                 dip++;
-                candy+=dip;
-                i++;
+                candy+=dip; //here adding dip not 1
+                i++; //why not i==n beacuse extra candies need to be removed.
             }
 
-            candy-=Math.min(peak,dip);
+            candy-=Math.min(peak,dip); //to remove extra candy variable  is only one take max value so remove minimum 
         }
         return candy;
 
