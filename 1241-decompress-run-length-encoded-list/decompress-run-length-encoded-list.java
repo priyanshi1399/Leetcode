@@ -1,19 +1,26 @@
 class Solution {
-    public void createList(List<Integer> res, int count,int val){
-        for(int i=0;i<count;i++){
-            res.add(val);
+    public void insertElementtoArray(int [] nums, int [] ans){
+        int j=0;
+        int n=nums.length;
+        for(int i=0;i<n;i+=2){
+            int index=nums[i];
+            int val=nums[i+1];
+            while(index>0){
+                ans[j]=val;
+                j++;
+                index--;
+            }
         }
     }
     public int[] decompressRLElist(int[] nums) {
         int n=nums.length;
-        List<Integer> res=new ArrayList<>();
-        for(int i=0;i<n-1;i+=2){
-            createList(res,nums[i],nums[i+1]);
+        int size=0;
+        for(int i=0;i<n;i+=2){
+            size+=nums[i];
         }
-        int [] ans=new int[res.size()];
-        for(int i=0;i<res.size();i++){
-            ans[i]=res.get(i);
-        }
+        int [] ans=new int[size];
+        insertElementtoArray(nums,ans);
+
         return ans;
     }
 }
