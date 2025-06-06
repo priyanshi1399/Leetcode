@@ -1,20 +1,16 @@
 class Solution {
-    public void insertIntoArray(int indexVal,int [] target, int targetValue){
-        int t=target.length;
-        for(int i=t-2;i>=indexVal;i--){
-            target[i+1]=target[i];
-        }
-
-        target[indexVal]=targetValue;
-        
-    }
     public int[] createTargetArray(int[] nums, int[] index) {
         int n=nums.length;
-        int [] target=new int[n];
+        List<Integer> res=new ArrayList<>();
         for(int i=0;i<n;i++){
-            insertIntoArray(index[i],target,nums[i]);
+             res.add(index[i],nums[i]);
+        }
+       
+        int [] arr=new int[res.size()];
+        for(int i=0;i<res.size();i++){
+            arr[i]=res.get(i);
         }
 
-        return target;
+    return arr;
     }
 }
