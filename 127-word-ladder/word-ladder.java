@@ -1,9 +1,9 @@
 class Solution {
     class Pair<K,V>{
-        K key;
-        V value;
+        private final K key;
+        private final V value;
 
-        Pair(K key,V value){
+        public Pair(K key,V value){
             this.key=key;
             this.value=value;
         }
@@ -16,31 +16,29 @@ class Solution {
         }
     }
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        Set<String> set=new HashSet<>(wordList);
-        Queue<Pair<String,Integer>> q=new LinkedList<>();
-        q.add(new Pair(beginWord,1));
-        if(set.contains(beginWord)){
-            set.remove(beginWord);
+        Set<String> wordSet=new HashSet<>();
+        for(String s:wordList){
+            wordSet.add(s);
         }
+        Queue<Pair<String,Integer>> q=new LinkedList<>();
+        q.add(new Pair<>(beginWord,1));
+
         while(!q.isEmpty()){
-            Pair<String,Integer> p=q.poll();
+            Pair<String,Integer> p=q.poll(); //hit
             String word=p.getKey();
             int step=p.getValue();
             if(word.equals(endWord)){
                 return step;
             }
             for(int i=0;i<word.length();i++){
-                char ch1=word.charAt(i);
+                char [] replaceArray=word.toCharArray();
                 for(char ch='a';ch<='z';ch++){
-                    char [] replaceArray=word.toCharArray();
-                    replaceArray[i]=ch;
-                    String replace=new String(replaceArray);
-                    if(set.contains(replace)){
-                        set.remove(replace);
-                        q.add(new Pair(replace,step+1));
+                    replaceArray[i]=ch; //hit-->ait,bit,cit....zit
+                    String replace=new String(replaceArray); //convert charArray to String
+                    if(wordSet.contains(replace)){
+                        wordSet.remove(replace);
+                        q.add(new Pair<>(replace,step+1));
                     }
-
-
                 }
             }
         }
