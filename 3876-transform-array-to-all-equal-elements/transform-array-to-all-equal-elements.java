@@ -5,7 +5,7 @@ class Solution {
        int op = 0;
         for (int i = 0; i < n - 1; i++) {
             if (temp[i] != val) {
-                temp[i] *=-1;;
+                temp[i] *=-1;
                 temp[i + 1] *=-1;
                 op++;
                 if (op > k) {
