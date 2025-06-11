@@ -36,10 +36,12 @@ class Solution {
             if(isSafe(row,col,board,n)){
                 char [] charArray=board.get(row).toCharArray();
                 charArray[col]='Q';
-                board.set(row,new String(charArray));//setting the value toString
+                String replaceString=new String(charArray);
+                board.set(row,replaceString);//setting the value toString
                 solve(row+1,board,n);
                 charArray[col]='.'; //setting . because of backtracking
-                board.set(row,new String(charArray));//setting the value toString
+                replaceString=new String(charArray);
+                board.set(row,replaceString);//setting the value toString
             }
         }
     }
