@@ -34,12 +34,12 @@ class Solution {
 
         for(int col=0;col<n;col++){
             if(isSafe(row,col,board,n)){
-                StringBuilder newRow=new StringBuilder(board.get(row)); //getting first row
-                newRow.setCharAt(col,'Q'); //setting Q at index 0
-                board.set(row,newRow.toString());//setting the value toString
+                char [] charArray=board.get(row).toCharArray();
+                charArray[col]='Q';
+                board.set(row,new String(charArray));//setting the value toString
                 solve(row+1,board,n);
-                newRow.setCharAt(col,'.'); //setting . because of backtracking
-                board.set(row,newRow.toString());//setting the value toString
+                charArray[col]='.'; //setting . because of backtracking
+                board.set(row,new String(charArray));//setting the value toString
             }
         }
     }
@@ -47,11 +47,11 @@ class Solution {
                
         List<String> board=new ArrayList<>();
         for(int i=0;i<n;i++){
-            StringBuilder curr=new StringBuilder();
+            String curr="";
             for(int j=0;j<n;j++){
-                curr.append('.');
+                curr=curr+'.';
             }
-            board.add(curr.toString());
+            board.add(curr);
         }
 
         solve(0,board,n);
