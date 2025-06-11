@@ -1,52 +1,39 @@
 class Solution {
-    List<List<String>> result=new ArrayList<>();
-    public boolean isSafe(int row,int col,List<String> board,int n){
-        //upward
-        for(int i=row;i>=0;i--){
-            if(board.get(i).charAt(col)=='Q'){
-                return false;
-            }
-        }
-
-        //upward left diagonal
-
-        for(int i=row,j=col;i>=0 && j>=0;i--,j--){
-            if(board.get(i).charAt(j)=='Q'){
-                return false;
-            }
-        }
-
-
-        //upward right diagonal
-        for(int i=row,j=col;i>=0 && j<n;i--,j++){
-            if(board.get(i).charAt(j)=='Q'){
-                return false;
-            }
-        }
-        return true;
-    }
+     Set<Integer> cols=new HashSet<>();//J
+        Set<Integer> diag=new HashSet<>(); //row+j
+        Set<Integer> antidiag=new HashSet<>(); //row-j
+        List<List<String>> result=new ArrayList<>();
     public void solve(int row,List<String> board,int n){
-        if(row==n){
+        if(row>=n){
             result.add(new ArrayList<>(board));
             return;
         }
 
-
-        for(int col=0;col<n;col++){
-            if(isSafe(row,col,board,n)){
-                char [] charArray=board.get(row).toCharArray();
-                charArray[col]='Q';
-                String replaceString=new String(charArray);
-                board.set(row,replaceString);//setting the value toString
-                solve(row+1,board,n);
-                charArray[col]='.'; //setting . because of backtracking
-                replaceString=new String(charArray);
-                board.set(row,replaceString);//setting the value toString
+        for(int j=0;j<n;j++){
+            
+            if(cols.contains(j) || diag.contains(row+j) || antidiag.contains(row-j)){
+                continue;
             }
+            cols.add(j);
+            diag.add(row+j);
+            antidiag.add(row-j);
+
+            char [] charArray=board.get(row).toCharArray();
+            charArray[j]='Q';
+            String replace=new String(charArray);
+            board.set(row,replace);
+            solve(row+1,board,n);
+            cols.remove(j);
+            diag.remove(row+j);
+            antidiag.remove(row-j);
+            charArray[j]='.';
+            replace=new String(charArray);
+            board.set(row,replace);
+           
         }
     }
     public List<List<String>> solveNQueens(int n) {
-               
+
         List<String> board=new ArrayList<>();
         for(int i=0;i<n;i++){
             StringBuilder curr=new StringBuilder();
@@ -58,6 +45,5 @@ class Solution {
 
         solve(0,board,n);
         return result;
-        
     }
 }
