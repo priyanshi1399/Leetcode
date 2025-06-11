@@ -49,11 +49,11 @@ class Solution {
                
         List<String> board=new ArrayList<>();
         for(int i=0;i<n;i++){
-            String curr="";
+            StringBuilder curr=new StringBuilder();
             for(int j=0;j<n;j++){
-                curr=curr+'.';
+                curr.append('.');
             }
-            board.add(curr);
+            board.add(curr.toString());
         }
 
         solve(0,board,n);
