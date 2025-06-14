@@ -32,7 +32,7 @@ class Solution {
         boolean [][] visited=new boolean [m][n];
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-                if(board[i][j]==word.charAt(0)){
+                if(!visited[i][j] && board[i][j]==word.charAt(0)){
                     if(solve(i,j,0,board,word,visited)){
                         return true;
                     }
