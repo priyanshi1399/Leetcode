@@ -6,20 +6,20 @@ class Solution {
     }
     public void sortColors(int[] nums) {
         int n=nums.length;
-        int mid=0;
         int low=0;
+        int i=0;
         int high=n-1;
-        while(mid<=high){
-            if(nums[mid]==0){
-                swap(low,mid,nums);
+        for(i=low; i<=high;){
+            if(nums[i]==0){
+                swap(low,i,nums);
                 low++;
-                mid++;
+                i++;
             }
-            else if(nums[mid]==1){
-                mid++;
+            else if(nums[i]==1){
+                i++;
             }
             else{
-                swap(high,mid,nums);
+                swap(high,i,nums);
                 high--;
             }
         }
