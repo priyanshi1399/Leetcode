@@ -20,10 +20,10 @@ class Solution {
             }
         }
 
-        String res=str.toString();
-        if(res.length()<100){
-            return res;
+       
+        if(str.length()<100){
+            return str.toString();
         }
-        return str.substring(0,100);
+        return str.toString().substring(0,100);
     }
 }
