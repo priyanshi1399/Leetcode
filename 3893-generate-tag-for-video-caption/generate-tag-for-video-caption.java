@@ -3,19 +3,19 @@ class Solution {
         String [] parts=caption.trim().split(" ");
         StringBuilder str=new StringBuilder("#");
         for(int i=0;i<parts.length;i++){ 
-            if (parts[i].equals(" ") || parts[i].equals("")) {
+            String s=parts[i];
+            if (s.equals(" ") ||s.equals("")) {
                 continue;
             }
             else{
-                System.out.println(parts[i]);
                 if(i==0){
-                    str.append(String.valueOf(parts[i].charAt(0)).toLowerCase());
+                    str.append(String.valueOf(s.charAt(0)).toLowerCase());
                 }
                 else{
-                str.append(String.valueOf(parts[i].charAt(0)).toUpperCase());
+                str.append(String.valueOf(s.charAt(0)).toUpperCase());
                 }
-                int len=parts[i].length();
-                String sub=parts[i].substring(1,len).toLowerCase();
+                int len=s.length();
+                String sub=s.substring(1,len).toLowerCase();
                 str.append(sub);
             }
         }
