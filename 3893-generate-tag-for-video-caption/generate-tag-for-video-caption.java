@@ -1,6 +1,6 @@
 class Solution {
     public String generateTag(String caption) {
-        String [] parts=caption.split(" ");
+        String [] parts=caption.trim().split(" ");
         StringBuilder str=new StringBuilder("#");
         for(int i=0;i<parts.length;i++){ 
             if (parts[i].equals(" ") || parts[i].equals("")) {
@@ -8,7 +8,7 @@ class Solution {
             }
             else{
                 System.out.println(parts[i]);
-                if(str.length()==1){
+                if(i==0){
                     str.append(String.valueOf(parts[i].charAt(0)).toLowerCase());
                 }
                 else{
