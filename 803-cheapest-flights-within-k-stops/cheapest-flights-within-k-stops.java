@@ -19,8 +19,11 @@ class Solution {
 
         q.add(new int [] {src,0});
         int level=0;
-        while(!q.isEmpty() && level<=k){
+        while(!q.isEmpty()){
             int size=q.size();
+            if(level>k){
+                break;
+            }
             while(size-->0){
                 int [] curr=q.poll();
                 int srcNode=curr[0];
