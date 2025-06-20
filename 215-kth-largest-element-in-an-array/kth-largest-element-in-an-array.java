@@ -4,11 +4,10 @@ class Solution {
         PriorityQueue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
         for(int num:nums){
             pq.add(num);
+            while(pq.size()>n-k+1){
+                    pq.poll();
+                }
         }
-
-        while(pq.size()>n-k+1){
-                pq.poll();
-            }
         return pq.peek();
     }
 }
