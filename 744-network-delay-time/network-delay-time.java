@@ -17,22 +17,21 @@ class Solution {
         Arrays.fill(res,Integer.MAX_VALUE);
         res[k]=0;
         
-        PriorityQueue<int []> pq=new PriorityQueue<>(Comparator.comparingInt(a->a[2]));
-        pq.add(new int []{k,k,0});
+        PriorityQueue<int []> pq=new PriorityQueue<>(Comparator.comparingInt(a->a[1]));
+        pq.add(new int []{k,0});
 
         while(!pq.isEmpty()){
             int [] curr=pq.poll();
             int srcNode=curr[0];
-            int destNode=curr[1];
-            int t=curr[2];
+            int t=curr[1];
 
-            for(int [] neighbor:adjList.get(destNode)){
+            for(int [] neighbor:adjList.get(srcNode)){
                 int adjNode=neighbor[0];
                 int time=neighbor[1];
 
                 if(t+time<res[adjNode]){
                     res[adjNode]=t+time;
-                    pq.add(new int []{destNode,adjNode,t+time});
+                    pq.add(new int []{adjNode,t+time});
                 }
             }
         }
