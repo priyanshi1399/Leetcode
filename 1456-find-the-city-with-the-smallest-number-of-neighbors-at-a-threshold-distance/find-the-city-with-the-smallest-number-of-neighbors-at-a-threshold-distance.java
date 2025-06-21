@@ -1,52 +1,44 @@
 class Solution {
     public int findTheCity(int n, int[][] edges, int distanceThreshold) {
-        int [][] distance=new int[n][n];
-        for(int [] row:distance){
+        int [][] dist=new int[n][n];
+        for(int [] row: dist){
             Arrays.fill(row,100000);
-        }
-        
+        }  
+        for(int i=0;i<n;i++){
+            dist[i][i]=0;
+        } 
+
         for(int [] edge:edges){
             int u=edge[0];
             int v=edge[1];
-            int wt=edge[2];
+            int w=edge[2];
 
-            distance[u][v]=wt;
-            distance[v][u]=wt;
-
-        }
-        
-
-        for(int i=0;i<n;i++){
-            distance[i][i]=0;
+            dist[u][v]=w;
+            dist[v][u]=w;
         }
 
         for(int via=0;via<n;via++){
             for(int i=0;i<n;i++){
                 for(int j=0;j<n;j++){
-                    distance[i][j]=Math.min(distance[i][j], distance[i][via]+distance[via][j]);
+                    dist[i][j]=Math.min(dist[i][j], dist[i][via]+dist[via][j]);
                 }
             }
         }
-       
-    
-        int maxCities=n;
-        int resultVertex=0;
-        for(int i=0;i<n;i++){
-            int city=0;
-            for(int j=0;j<n;j++){
-                if(distance[i][j]<=distanceThreshold){
-                    city++;
-                }
-            }
-            
-            if(city<=maxCities){
-                maxCities=city;
-                resultVertex=i;
-            }
-            
-        }
-        return resultVertex;
 
-    
+        int result=-1;
+        int leastReachCount=Integer.MAX_VALUE;
+        for(int i=0;i<n;i++){
+            int count=0;
+            for(int j=0;j<n;j++){
+                if(i!=j && dist[i][j]<=distanceThreshold){
+                    count++;
+                }
+            }
+            if(count<=leastReachCount){
+                leastReachCount=count;
+                result=i;
+            }
+        }
+        return result;
     }
 }
