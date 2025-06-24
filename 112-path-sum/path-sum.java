@@ -31,9 +31,7 @@ class Solution {
         return false;
     }
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        if(root==null){
-            return false;
-        }
+        
         return solve(root, targetSum);
             
     }
