@@ -24,7 +24,7 @@ class Solution {
        root.left=root.right;
        root.right=temp;
 
-        TreeNode left=solve(root.left);
+        TreeNode left=solve(root.left); //now replaced nodes will be there means 7 will be at left -> 6 and 9 will be replaced first;
         TreeNode right=solve(root.right);
         return root;
     }
