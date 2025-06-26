@@ -10,7 +10,10 @@
  * }
  */
 public class Solution {
-    public ListNode Traverse(ListNode curr1,ListNode curr2){
+    public ListNode collission(ListNode curr1,ListNode curr2,int nodeToSkip){
+        for(int i=1;i<=nodeToSkip;i++){
+                curr1=curr1.next; //same level
+            }
         while(curr1!=curr2){
                 curr1=curr1.next;
                 curr2=curr2.next;
@@ -34,26 +37,11 @@ public class Solution {
         curr2=headB;
         int nodeToSkip=Math.abs(size1-size2);
         if(size1>size2){
-            
-            for(int i=1;i<=nodeToSkip;i++){
-                curr1=curr1.next; //same level
-            }
-            
-            return Traverse(curr1,curr2);
+            return collission(curr1,curr2,nodeToSkip);
         }
-
-        else if(size1==size2){
-            return Traverse(curr1,curr2);
-        }
-        else{    
-            for(int i=1;i<=nodeToSkip;i++){
-                curr2=curr2.next; //same level
-            }
-            
-            return Traverse(curr1,curr2);
-        }
-
-
+       
+        return collission(curr2,curr1,nodeToSkip);
+        
 
     }
 }
