@@ -10,6 +10,13 @@
  * }
  */
 public class Solution {
+    public ListNode Traverse(ListNode curr1,ListNode curr2){
+        while(curr1!=curr2){
+                curr1=curr1.next;
+                curr2=curr2.next;
+            }
+            return curr1;
+    }
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         int size1=0;
         int size2=0;
@@ -32,41 +39,18 @@ public class Solution {
                 curr1=curr1.next; //same level
             }
             
-            while(curr1!=curr2){
-                curr1=curr1.next;
-                curr2=curr2.next;
-            }
-            if(curr1!=null && curr2!=null){
-                return curr1;
-            }
-            return null;
+            return Traverse(curr1,curr2);
         }
 
         else if(size1==size2){
-             while(curr1!=curr2){
-                curr1=curr1.next;
-                curr2=curr2.next;
-            }
-            if(curr1!=null && curr2!=null){
-                return curr1;
-            }
-            return null;
-
+            return Traverse(curr1,curr2);
         }
-        else{
-           
+        else{    
             for(int i=1;i<=nodeToSkip;i++){
                 curr2=curr2.next; //same level
             }
             
-            while(curr1!=curr2){
-                curr1=curr1.next;
-                curr2=curr2.next;
-            }
-            if(curr1!=null && curr2!=null){
-                return curr1;
-            }
-            return null;
+            return Traverse(curr1,curr2);
         }
 
 
