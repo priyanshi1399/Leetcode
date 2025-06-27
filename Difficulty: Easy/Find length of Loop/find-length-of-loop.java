@@ -10,35 +10,20 @@ class Node
 class Solution {
     // Function to find the length of a loop in the linked list.
     public int countNodesinLoop(Node head) {
-        if(head==null || head.next==null){
-            return 0;
-        }
-        Node slow=head;
-        Node fast=head;
+        int timer=1;
+        HashMap<Node,Integer> map= new HashMap<>();
         
-        while(fast!=null && fast.next!=null){
-            slow=slow.next;
-            fast=fast.next.next;
-            if(slow==fast){
-                break;
+        Node curr=head;
+        while(curr!=null){
+            if(map.containsKey(curr)){
+                int val=map.get(curr);
+                return timer-val;
             }
-        }
-        if(fast==null || fast.next==null){
-            return 0;
-        }
-        slow=head;
-        while(slow!=fast){
-            slow=slow.next;
-            fast=fast.next;
-        }
-        
-        Node curr=slow;
-        int size=1;
-        while(curr.next!=fast){
-            size++;
+            
+            map.put(curr,timer);
+            timer++;
             curr=curr.next;
         }
-        return size;
-        
+        return 0;
     }
 }
