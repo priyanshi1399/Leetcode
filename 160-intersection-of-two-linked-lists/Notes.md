@@ -1,1 +1,1 @@
-<h2>intersection-of-two-linked-lists Notes</h2><hr>[ Time taken: 30 m 42 s ]
+<h2>intersection-of-two-linked-lists Notes</h2><hr>[ Time taken: 2 m 35 s ]
