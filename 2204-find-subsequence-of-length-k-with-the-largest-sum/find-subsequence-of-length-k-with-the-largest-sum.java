@@ -8,18 +8,18 @@ class Solution {
                 pq.poll();
             }
         }
-        Map<Integer,Integer> map=new TreeMap<>();
+        
+        PriorityQueue<Integer> pq2=new PriorityQueue<>();
         while(!pq.isEmpty()){
-            int [] curr=pq.poll();
-            map.put(curr[1],curr[0]);
+            pq2.add(pq.poll()[1]);
         }
-
-        int [] ans=new int[k];
         int idx=0;
-        for(Map.Entry<Integer,Integer> entry:map.entrySet()){
-            ans[idx]=nums[entry.getKey()];
+        int [] ans=new int[k];
+        while(!pq2.isEmpty()){
+            ans[idx]=nums[pq2.poll()];
             idx++;
         }
         return ans;
+
     }
 }
