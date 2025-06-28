@@ -1,25 +1,32 @@
 class Solution {
     public int[] maxSubsequence(int[] nums, int k) {
         int n=nums.length;
-        PriorityQueue<int [] > pq=new PriorityQueue<>((a,b)->Integer.compare(a[0],b[0]));
-        for(int i=0;i<n;i++){
-            pq.add(new int []{nums[i],i});
-            while(pq.size()>k){
-                pq.poll();
+        int [] newArray=Arrays.copyOf(nums,n);
+
+        Arrays.sort(newArray);
+        int threshold=newArray[n-k];
+        int countThreshold=0;
+        for(int i=n-k;i<n;i++){
+            if(newArray[i]==threshold){
+                countThreshold++;
             }
-        }
-        
-        PriorityQueue<Integer> pq2=new PriorityQueue<>();
-        while(!pq.isEmpty()){
-            pq2.add(pq.poll()[1]);
         }
         int idx=0;
         int [] ans=new int[k];
-        while(!pq2.isEmpty()){
-            ans[idx]=nums[pq2.poll()];
-            idx++;
+        for(int num:nums){
+            if(num>threshold){
+                ans[idx++]=num;
+            }
+            else if(num==threshold && countThreshold>0){
+                ans[idx++]=num;
+                countThreshold--;
+            }
+            if(idx==k){
+                break;
+            }
         }
         return ans;
 
+        
     }
 }
