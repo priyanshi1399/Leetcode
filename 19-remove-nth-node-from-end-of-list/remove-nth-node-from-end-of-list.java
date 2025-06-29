@@ -21,13 +21,20 @@ class Solution {
         }
         
         curr=head;
-        
-        for(int i=1;i<size-n;i++){
-            curr=curr.next;           
+        int res=size-n;
+        while(curr!=null){
+            if(res==1){
+                break;
+            }
+            res--;
+            curr=curr.next;
+
         }
-        if(size-n==0){
-            head=head.next;
+        if(size==n){
+            ListNode newHead=head.next;
+            return newHead;
         }
+        ListNode nodeTodelete=curr.next;
         curr.next=curr.next.next;
 
        return head;
