@@ -11,15 +11,26 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        HashSet<ListNode> seen=new HashSet<>();
-        ListNode curr=head;
-        while(curr!=null){
-            if(seen.contains(curr)){ //if it has already that node
-                return true;
+        ListNode slow=head;
+        ListNode fast=head;
+        
+        while(fast!=null && fast.next!=null){ //it reaches before slow and if it is null no cycle
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){ //they will  meet if cycle present
+                break;
             }
-            seen.add(curr);
-            curr=curr.next;
         }
-        return false;
+
+        if(fast==null || fast.next==null){// nocycle
+            return false;
+        }
+
+        slow=head;
+        while(fast!=slow){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        return true;
     }
 }
