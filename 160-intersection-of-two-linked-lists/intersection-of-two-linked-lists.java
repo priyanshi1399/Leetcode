@@ -10,40 +10,21 @@
  * }
  */
 public class Solution {
-    public ListNode collission(ListNode t1,ListNode t2,int diff){
-        for(int i=1;i<=diff;i++){
-            t1=t1.next;
-        }
-
-        while(t1!=t2){
-            t1=t1.next;
-            t2=t2.next;
-        }
-        return t1;
-    }
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        int size1=0;
-        ListNode curr=headA;
-        while(curr!=null){
-            size1++;
-            curr=curr.next;
-        }
+        HashMap<ListNode,Integer> map=new HashMap<>();
+        ListNode curr1=headA;
+        while(curr1!=null){
+            map.put(curr1,1);
+            curr1=curr1.next;
+        } 
 
-        int size2=0;
-        curr=headB;
-        while(curr!=null){
-            size2++;
-            curr=curr.next;
+        ListNode curr2=headB;
+        while(curr2!=null){
+            if(map.containsKey(curr2)){
+                return curr2; 
+            }
+            curr2=curr2.next;
         }
-        int diff=Math.abs(size1-size2);
-        ListNode t1=headA;
-        ListNode t2=headB;
-        if(size1>size2){ //size of 1st is greater
-            return collission(t1,t2,diff);
-        }
-        else{
-            return collission(t2,t1,diff);
-        }
-        
+        return null;
     }
 }
