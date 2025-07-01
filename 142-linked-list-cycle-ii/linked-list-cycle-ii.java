@@ -14,15 +14,24 @@ public class Solution {
         if(head==null){
             return null;
         }
-        HashSet<ListNode> seen=new HashSet<>();
-        ListNode curr=head;
-        while(curr!=null){
-            if(seen.contains(curr)){ //if it has already that node
-                return curr;
+
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                break;
             }
-            seen.add(curr);
-            curr=curr.next;
         }
-        return null;
+        if(fast==null || fast.next==null){
+            return null; //no cycle fast goes to null
+        }
+        slow=head;
+        while(slow!=fast){
+            slow=slow.next;
+            fast=fast.next;
+        }
+        return slow;
     }
 }
