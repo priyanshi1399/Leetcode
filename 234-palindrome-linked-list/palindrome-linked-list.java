@@ -40,11 +40,7 @@ class Solution {
         fast.next=null;
         ListNode res=reverse(half);
         ListNode temp1=head;
-        System.out.println(temp1.val);
-        ListNode dummy=new ListNode(-1);
-        ListNode temp2=dummy;
-        temp2.next=res;
-        temp2=temp2.next;
+        ListNode temp2=res;
         while(temp1!=null && temp2!=null){
             if(temp1.val!=temp2.val){
                 return false;
