@@ -10,45 +10,40 @@
 }*/
 class Solution {
     static Node segregate(Node head) {
+        if(head==null || head.next==null){
+            return head;
+        }
         Node zeroHead=new Node(-1);
-        Node temp1=zeroHead;
         Node oneHead=new Node(-1);
-        Node temp2=oneHead;
         Node twoHead=new Node(-1);
-        Node temp3=twoHead;
+        
+        Node zero=zeroHead;
+        Node one=oneHead;
+        Node two=twoHead;
         
         Node curr=head;
         while(curr!=null){
             if(curr.data==0){
-                temp1.next=new Node(curr.data);
-                temp1=temp1.next;
-                
+                zero.next=curr;
+                zero=zero.next; //or zero=curr
             }
             else if(curr.data==1){
-                temp2.next=new Node(curr.data);
-                temp2=temp2.next;
+                one.next=curr; //directly link the node
+                one=one.next; //
             }
             else{
-                 temp3.next=new Node(curr.data);
-                temp3=temp3.next;
+                two.next=curr; //directly link the node
+                two=two.next; // two=curr bcz two's next is curr
             }
             curr=curr.next;
         }
         
-       
-        if(oneHead.next!=null){
-            temp1.next=oneHead.next;
-        }
-        else{
-            temp1.next=twoHead.next;
-        }
-        
-        temp2.next=twoHead.next;
-        return zeroHead.next;
-        
-        
-       
-       
+        //zero will be at last
+        zero.next=(oneHead.next!=null)?oneHead.next:twoHead.next;
+        one.next=twoHead.next; //if twoHead is null then one.next=twoHead==null
+        two.next=null;
+        Node newHead=zeroHead.next;
+        return newHead;
         
         
     }
