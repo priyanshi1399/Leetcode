@@ -15,16 +15,17 @@ class Solution {
         }
         ListNode odd=head;
         ListNode even=head.next;
-        ListNode evenHead=head.next;
+        ListNode evenHead=head.next; //stored to connect later
 
         while(even!=null && even.next!=null){
-            odd.next=odd.next.next;
-            even.next=even.next.next;
+            odd.next=odd.next.next; //1->3->5
+            even.next=even.next.next; //2->4
+             //2 is sepearted so before only we have stored it
             odd=odd.next;
             even=even.next;
         }
-
         odd.next=evenHead;
         return head;
+
     }
 }
