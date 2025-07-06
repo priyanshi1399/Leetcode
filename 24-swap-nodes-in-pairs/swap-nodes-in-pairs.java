@@ -13,19 +13,10 @@ class Solution {
         if(head==null || head.next==null){
             return head;
         }
-        ListNode dummy=new ListNode(-1);
-        ListNode prev=dummy;
+        ListNode temp=head.next; //store it because it will change
+        head.next=swapPairs(head.next.next);
+        temp.next=head;
+        return temp;
 
-        ListNode curr=head;
-        while(curr!=null && curr.next!=null){
-            ListNode f=curr.next;
-            curr.next=f.next;
-            f.next=curr;
-            prev.next=f;
-            prev=curr;
-            curr=curr.next;
-        }
-
-        return dummy.next;
     }
 }
