@@ -1,52 +1,49 @@
-class ListNode{
-    public ListNode next,prev;
-    public int key,  val;
+class Node{
+    Node next,prev;
+    int key,val;
 
-    ListNode(){
+    Node(){
         key=val=-1;
         next=prev=null;
     }
-    ListNode (int key, int val){
+    Node(int key,int val){
         this.key=key;
         this.val=val;
         prev=next=null;
     }
 }
 class LRUCache {
-    private ListNode head;
-    private ListNode tail;
-    private HashMap<Integer,ListNode> map;
-    private  int cap;
-    
-    private void InsertAfterHead(ListNode node){
-        ListNode nextNode = head.next;
-        head.next = node;
-        nextNode.prev = node;
-        node.prev = head;
-        node.next = nextNode;
-        
+    private HashMap<Integer,Node> map;
+    private int cap;
+    private Node head;
+    private Node tail;
+
+    private void InsertAfterHead(Node node){
+        Node nextNode=head.next;
+        node.next=nextNode;
+        nextNode.prev=node;
+        head.next=node;
+        node.prev=head;
+
     }
+    private void deleteNode(Node node){
+        Node prevNode=node.prev;
+        Node nextNode=node.next; //next node after node
 
-    
-
-    private void deleteNode(ListNode node){
-        ListNode nextNode=node.next;
-        ListNode prevNode=node.prev;
-
+       
         nextNode.prev=prevNode;
         prevNode.next=nextNode;
-    }
 
+    }
     public LRUCache(int capacity) {
-        head=new ListNode();
-        tail=new ListNode();
         map=new HashMap<>();
         cap=capacity;
+        head=new Node();
+        tail=new Node();
 
-        //make the connection
-        head.next=tail;
+        //link make the connection
         tail.prev=head;
-
+        head.next=tail;
     }
     
     public int get(int key) {
@@ -54,47 +51,45 @@ class LRUCache {
             return -1;
         }
 
-        ListNode node=map.get(key); //getting the address so that we can get the data
+        Node node=map.get(key);
         int value=node.val;
-        //before getting value we have to delete that node from tail ans insert at head next beacuse it is recently used
+
         deleteNode(node);
-       
-        //became recently used
+
         InsertAfterHead(node);
         return value;
-
     }
     
     public void put(int key, int value) {
         if(map.containsKey(key)){
-            ListNode node=map.get(key); //get the node 
-            node.val=value; //updating the value
+            Node node=map.get(key);
+            node.val=value;
 
-            //we have to delete from DLL
             deleteNode(node);
-            //insert after head also because it is  most recently used
 
             InsertAfterHead(node);
-
             map.put(key,node);
             return;
-           
+
         }
 
         if(map.size()>=cap){
-            ListNode node=tail.prev; //get the node which is least recently used
-            map.remove(node.key);
 
-            deleteNode(node); //delete the node
+            Node node=tail.prev;
+
+            int val=node.key;
+
+            map.remove(val);
+
+            deleteNode(node);
 
         }
 
-        ListNode newNode=new ListNode(key,value);
+        Node newNode=new Node(key,value);
 
         map.put(key,newNode);
 
         InsertAfterHead(newNode);
-        
     }
 }
 
