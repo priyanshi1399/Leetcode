@@ -1,17 +1,18 @@
 class LRUCache {
-    int n;
     HashMap<Integer,Integer> map;
-    Queue<Integer> q=new LinkedList<>();
+    Queue<Integer> queue;
+    int n;
     public LRUCache(int capacity) {
-        n=capacity;
         map=new HashMap<>();
+        queue=new LinkedList<>();
+        n=capacity;
     }
     
     public int get(int key) {
         if(map.containsKey(key)){
-            int val=map.get(key); //receiving the value that exists in the map;
-            q.remove(key);
-            q.add(key);
+            int val=map.get(key);
+            queue.remove(key);
+            queue.add(key);
             return val;
         }
         return -1;
@@ -19,15 +20,14 @@ class LRUCache {
     
     public void put(int key, int value) {
         if(map.containsKey(key)){
-            int val=map.get(key);
-            q.remove(key);
+            queue.remove(key);
         }
-        else if(!q.isEmpty() && map.size()>=n){
-            int keyToRemove=q.poll();
+        else if((map.size()>=n) && (!queue.isEmpty())){
+            int keyToRemove=queue.poll();
             map.remove(keyToRemove);
         }
         map.put(key,value);
-        q.add(key);
+        queue.add(key);
     }
 }
 
