@@ -10,7 +10,7 @@
  */
 class Solution {
     public ListNode rotateRight(ListNode head, int k) { 
-        if(head==null || head.next==null || k==0){
+        if(head==null  || k==0){
             return head;
         }
         
@@ -21,6 +21,9 @@ class Solution {
             temp=temp.next;
         }
         k=k%size;
+        if(k==0){
+            return head;
+        }
         temp.next=head;
         ListNode fast=head;
         for(int i=1;i<size-k;i++){
