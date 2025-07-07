@@ -1,16 +1,18 @@
 class ListNode{
-    String val;
-    ListNode next;
+    String data;
     ListNode prev;
+    ListNode next;
 
-    public ListNode(String val){
-        this.val=val;
+    ListNode(String data){
+        this.data=data;
     }
-    public ListNode(String val,ListNode next,ListNode prev){
-        this.val=val;
-        this.next=next;
+
+    ListNode(String data,ListNode prev,ListNode next){
+        this.data=data;
         this.prev=prev;
+        this.next=next;
     }
+
 
 }
 class BrowserHistory {
@@ -31,7 +33,7 @@ class BrowserHistory {
             curr=curr.prev;
             steps--;
         }
-        return curr.val;
+        return curr.data;
     }
     
     public String forward(int steps) {
@@ -39,7 +41,7 @@ class BrowserHistory {
             curr=curr.next;
             steps--;
         }
-        return curr.val;
+        return curr.data;
     }
 }
 
