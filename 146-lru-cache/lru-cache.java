@@ -3,7 +3,7 @@ class Node{
     int key,val;
 
     Node(){
-        key=val=-1;
+        key=val=-1; //to avoid null pointer  act like dummy
         next=prev=null;
     }
     Node(int key,int val){
@@ -27,10 +27,10 @@ class LRUCache {
 
     }
     private void deleteNode(Node node){
-        Node prevNode=node.prev;
+        Node prevNode=node.prev; //node before  Node prev 
         Node nextNode=node.next; //next node after node
 
-       
+        //connecting both after deleting
         nextNode.prev=prevNode;
         prevNode.next=nextNode;
 
@@ -51,45 +51,45 @@ class LRUCache {
             return -1;
         }
 
-        Node node=map.get(key);
-        int value=node.val;
+        Node node=map.get(key); //getting node
+        int value=node.val; //getting the value of the node
 
-        deleteNode(node);
+        deleteNode(node); //because now it will come at the place of most used after head
 
-        InsertAfterHead(node);
+        InsertAfterHead(node); //insert after head
         return value;
     }
     
     public void put(int key, int value) {
         if(map.containsKey(key)){
-            Node node=map.get(key);
-            node.val=value;
+            Node node=map.get(key); //get the node
+            node.val=value; //update with new value
 
-            deleteNode(node);
+            deleteNode(node); //delete beacuse it will come most frequently used not recently
 
-            InsertAfterHead(node);
-            map.put(key,node);
+            InsertAfterHead(node); //insert after the head
+            map.put(key,node); //insert updated value to map
             return;
 
         }
 
         if(map.size()>=cap){
 
-            Node node=tail.prev;
+            Node node=tail.prev; //get node from prev
 
-            int val=node.key;
+            int val=node.key; //get the val means to remove the key from the map
 
-            map.remove(val);
+            map.remove(val); //remove from the map
 
-            deleteNode(node);
+            deleteNode(node); //delete beacuse its not there
 
         }
 
-        Node newNode=new Node(key,value);
+        Node newNode=new Node(key,value); //create new Node
+ 
+        map.put(key,newNode); //put into map
 
-        map.put(key,newNode);
-
-        InsertAfterHead(newNode);
+        InsertAfterHead(newNode); //Insert at the most used.
     }
 }
 
