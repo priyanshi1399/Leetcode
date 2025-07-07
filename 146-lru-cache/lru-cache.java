@@ -21,7 +21,6 @@ class LRUCache {
     
     public void put(int key, int value) {
         if(map.containsKey(key)){
-            int val=map.get(key);
             q.remove(key); //removing this key from queue
 
             map.put(key,value); //putting new value
