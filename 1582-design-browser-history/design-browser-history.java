@@ -1,42 +1,36 @@
 class BrowserHistory {
-    Stack<String> stck1;
-    Stack<String> stck2;
-    String ans;
 
+    Stack<String> past;
+    Stack<String> future;
+    String curr;
     public BrowserHistory(String homepage) {
-        ans=homepage;
-        stck1=new Stack<>();
-        stck2=new Stack<>();
-
+        past=new Stack<>();
+        future=new Stack<>();
+        curr=homepage;
     }
     
     public void visit(String url) {
-        stck1.push(ans);
-        ans=url;
-        stck2.clear();
+        past.push(curr);
+        future.clear();
+        curr=url;
     }
     
     public String back(int steps) {
-
-        while(!stck1.isEmpty() && steps>0){
-            stck2.push(ans); 
-            ans=stck1.pop();
+        while(!past.isEmpty() && steps>0){
+            future.push(curr);
+            curr=past.pop();
             steps--;
-        }
-        return ans;
-
-        }
+        }   
+        return curr;
+    }
     
     public String forward(int steps) {
-       
-        
-         while(!stck2.isEmpty() && steps>0){
-            stck1.push(ans);
-            ans=stck2.pop();
+        while(!future.isEmpty() && steps>0){
+            past.push(curr);
+            curr=future.pop();
             steps--;
-        }
-       
-        return ans;
+        }   
+        return curr;
     }
 }
 
