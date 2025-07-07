@@ -11,8 +11,8 @@ class LRUCache {
     public int get(int key) {
         if(map.containsKey(key)){
             int val=map.get(key);
-            queue.remove(key);
-            queue.add(key);
+            queue.remove(key);//remove also 
+            queue.add(key); //add because now it is used
             return val;
         }
         return -1;
@@ -22,7 +22,7 @@ class LRUCache {
         if(map.containsKey(key)){
             queue.remove(key);
         }
-        else if((map.size()>=n) && (!queue.isEmpty())){
+        else if((map.size()>=n) && (!queue.isEmpty())){ //if both if will be there else if should be there
             int keyToRemove=queue.poll();
             map.remove(keyToRemove);
         }
