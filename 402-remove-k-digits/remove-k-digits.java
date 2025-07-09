@@ -9,9 +9,9 @@ class Solution {
                 result.deleteCharAt(result.length()-1); //delete from the last of the String
                 k--;
         }
-        if(result.length()>0 || num.charAt(i)!='0'){
+      
             result.append(num.charAt(i)); //to avoid leading zeroes
-       }
+       
        }
 
        //if numbers are in increasing order and k is stil left
@@ -22,7 +22,9 @@ class Solution {
        if(result.length()==0){
         return "0";
        }
-       return result.toString();
+       String res=result.toString();
+       String newString=res.replaceAll("^0+(?!$)","");
+       return newString;
 
 
     }
