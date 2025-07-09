@@ -1,41 +1,85 @@
+class Node{
+    public int key,val;
+    public Node next;
+    public Node prev;
+
+    public Node(){
+        key=val=-1;
+        next=prev=null;
+    }
+    public Node(int key,int val){
+        this.key=key;
+        this.val=val;
+        next=prev=null;
+    }
+}
 class LRUCache {
-    HashMap<Integer,Integer> map;
-    Queue<Integer> q;
+    HashMap<Integer,Node> map;
+    Node head;
+    Node tail;
     int cap;
 
+    private void insertAfterHead(Node node){
+        Node nextNode=head.next;
+        node.prev=head;
+        head.next=node;
+        node.next=nextNode;
+        nextNode.prev=node;
+    }
+    private void deleteNode(Node node){
+        Node prevNode=node.prev;
+        Node nextNode=node.next;
+
+        nextNode.prev=prevNode;
+        prevNode.next=nextNode;
+    }
     public LRUCache(int capacity) {
-        cap=capacity;
         map=new HashMap<>();
-        q=new LinkedList<>();
+        cap=capacity;
+        head=new Node();
+        tail=new Node();
+
+        head.next=tail;
+        tail.prev=head;
+
     }
     
     public int get(int key) {
-        if(map.containsKey(key)){
-            int val=map.get(key);
-            q.remove(key); //first remove
-            q.add(key); //push because just now/recently used 
-            return val;
+        if(!map.containsKey(key)){
+            return -1;
         }
-        return -1;
+
+        Node node=map.get(key);
+        int val=node.val;
+
+        deleteNode(node);
+        insertAfterHead(node);
+        return val;
+
+
     }
     
     public void put(int key, int value) {
         if(map.containsKey(key)){
-            q.remove(key); //removing this key from queue
+            Node node=map.get(key);
+            node.val=value;
 
-            map.put(key,value); //putting new value
-            q.add(key); //became recently used add again
+            deleteNode(node);
+            map.put(key,node);
+            insertAfterHead(node);
             return;
-
         }
-        else if(map.size()>=cap && !q.isEmpty()){
-            int keyToRemove=q.poll(); //get the key from queue and remove from map
-            map.remove(keyToRemove);
 
+        if(map.size()>=cap){
+            Node node=tail.prev;
+            int val=node.key;
+
+            map.remove(val);
+            deleteNode(node);
         }
-        map.put(key,value);
-        q.add(key);
-
+        Node newNode=new Node(key,value);
+        map.put(key,newNode);
+        insertAfterHead(newNode);
     }
 }
 
