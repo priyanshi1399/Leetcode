@@ -1,41 +1,35 @@
 class Solution {
-    public int [] previousSmaller(int [] heights){
-        int n=heights.length;
-        int [] pse=new int[n];
-        Stack<Integer> stck=new Stack<>();
-        for(int i=0;i<n;i++){
-            while((!stck.isEmpty()) && (heights[stck.peek()]>=heights[i])){
-                stck.pop();
-            }
-
-            pse[i]=stck.isEmpty()?-1:stck.peek(); //index 
-            stck.push(i);
-        }
-        return pse;
-    }
-
-     public int [] nextSmaller(int [] heights){
-        int n=heights.length;
-        int [] nse=new int[n];
-        Stack<Integer> stck=new Stack<>();
-        for(int i=n-1;i>=0;i--){
-            while(!stck.isEmpty() && heights[stck.peek()]>=heights[i]){
-                stck.pop();
-            }
-
-            nse[i]=stck.isEmpty()?n:stck.peek(); //index 
-            stck.push(i);
-        }
-        return nse;
-    }
     public int largestRectangleArea(int[] heights) {
+        Stack<Integer> stck=new Stack<>();
         int n=heights.length;
-        int [] pse=previousSmaller(heights);
-        int [] nse=nextSmaller(heights);
         int maxArea=Integer.MIN_VALUE;
         for(int i=0;i<n;i++){
-            maxArea=Math.max(maxArea,(heights[i]*(nse[i]-pse[i]-1)));
+            while(!stck.isEmpty() && heights[stck.peek()]>=heights[i]){
+                //when you kick out the elemen you have found next smaller to it and if stck is not empty the its prev will be that element
+                int index=stck.pop(); //the element index whcih you are popping out
+
+                //write the nse and pse for that
+
+                int nse=i;
+                int pse=stck.isEmpty()?-1:stck.peek();
+                //index is that element
+                maxArea=Math.max(maxArea,heights[index]*(nse-pse-1));
+            }
+
+            stck.push(i);
+        }
+        //what if out stack has some elements we have not touched those elements
+
+        while(!stck.isEmpty()){
+            int index=stck.pop();
+
+            int nse=n; //no next smaller
+            int pse=stck.isEmpty()?-1:stck.peek();
+            maxArea=Math.max(maxArea,heights[index]*(nse-pse-1));
         }
         return maxArea;
+
+
+
     }
 }
