@@ -8,20 +8,16 @@ class Solution {
         }
 
         Arrays.sort(pair,(a,b)->Integer.compare(a[0],b[0]));
-
-        Stack<Double> stck=new Stack<>();
-        for(int i=n-1;i>=0;i--){
+        double time=(target-pair[n-1][0])/(1.0*pair[n-1][1]);
+        int count=1; //taken first already 
+        for(int i=n-2;i>=0;i--){
             double t=(target-pair[i][0])/(1.0*pair[i][1]);
-            if(stck.isEmpty()){
-                stck.push(t);
-
-            }
-            else{
-                if(t>stck.peek()){
-                    stck.push(t);
+            System.out.println(t);
+                if(t>time){
+                    time=t;
+                    count++;
                 }
             }
-        }
-        return stck.size();
+        return count;
     }
 }
