@@ -1,44 +1,37 @@
 class MinStack {
-    private Stack<Long> stck;
-    private long mini;
-    private long newVal;
-    private long topVal;
+    Stack<Integer> stck;
+    Stack<Integer> minStack;;
     public MinStack() {
         stck=new Stack<>();
+        minStack=new Stack<>();
     }
     
     public void push(int val) {
-       if(stck.isEmpty()){
-        stck.push((long)val);
-        mini=val;
-       } 
-       else if(val<=mini){ //value is going to be in place of mini have to a new value
-            stck.push(2*(long)val-mini);
-            mini=val;
+        stck.push(val);
+        if(minStack.isEmpty()){
+            minStack.push(val);
         }
         else{
-            stck.push((long)val);
+            if(val<=minStack.peek()){
+                minStack.push(val);
+            }
         }
-       
+        
     }
     
     public void pop() {
-        newVal=stck.pop(); //storing because need to check if prevMin needs to be updated
-        if(newVal<=mini){ //this value is changed
-           mini=2*mini-newVal;  //newVal=2*val-min; //min=2*val-newVal;
+        int x=stck.pop();
+        if(minStack.peek()==x){
+            minStack.pop();
         }
     }
     
     public int top() {
-         topVal=stck.peek();
-        if(topVal<=mini){ //changed val
-            return (int)mini;
-        }
-        return (int)topVal;
+        return stck.peek();
     }
     
     public int getMin() {
-        return (int) mini;
+        return minStack.peek();
     }
 }
 
