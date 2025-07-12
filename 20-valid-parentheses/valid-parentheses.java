@@ -7,6 +7,7 @@ class Solution {
         if(s.length()%2!=0){ //odd length
             return false;
         }
+        // First char is closing- return false
         if(s.charAt(0)==')' || s.charAt(0)=='}' || s.charAt(0)==']'){
             return false; //no match
         }
@@ -18,6 +19,7 @@ class Solution {
 
             if(ch=='(' || ch=='{' || ch=='['){
                 stck.push(ch);
+                continue;
             }
 
             if(stck.isEmpty()){
