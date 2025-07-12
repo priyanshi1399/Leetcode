@@ -1,28 +1,59 @@
 class Solution {
     public boolean isValid(String s) {
+        //edge case when string is Empty
+        if(s==""){
+            return false;
+        }
+        if(s.length()%2!=0){ //odd length
+            return false;
+        }
+        if(s.charAt(0)==')' || s.charAt(0)=='}' || s.charAt(0)==']'){
+            return false; //no match
+        }
+
         Stack<Character> stck=new Stack<>();
         for(int i=0;i<s.length();i++){
+
             char ch=s.charAt(i);
-           if(!stck.isEmpty() && ch==']' && stck.peek()=='['){
+
+            if(ch=='(' || ch=='{' || ch=='['){
+                stck.push(ch);
+            }
+
+            if(stck.isEmpty()){
+                return false; //only one match  ""(){}}{"
+            }
+            char check;
+            switch(ch){
+                case ')':
+                check=stck.peek();
+                if(check!='(') //not on the matching paraenthesis
+                    return false;
                 stck.pop();
-           }
-           else if(!stck.isEmpty()  && ch=='}' && stck.peek()=='{'){
+                break;
+
+                case '}':
+                check=stck.peek();
+                if(check!='{') //not on the matching paraenthesis
+                    return false;
                 stck.pop();
-           }
-           else if(!stck.isEmpty() && ch==')' && stck.peek()=='('){
-            stck.pop();
-           }
-           else if(ch=='(' || ch=='{' || ch=='[' ){
-            stck.push(ch);
-           }
-           
-           else{
-            return false;
-           }
+                break;
+
+                case ']':
+                check=stck.peek();
+                if(check!='[') //not on the matching paraenthesis
+                    return false;
+                stck.pop();
+                break;
+
+            }
+
         }
         if(stck.isEmpty()){
             return true;
         }
         return false;
+
     }
 }
+//"(){}}{"
