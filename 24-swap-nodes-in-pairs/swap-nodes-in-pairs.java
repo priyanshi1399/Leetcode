@@ -13,10 +13,10 @@ class Solution {
         if(head==null || head.next==null){
             return head;
         }
-        ListNode temp=head.next; //store it because it will change
-        head.next=swapPairs(head.next.next);
+
+        ListNode temp=head.next;
+        head.next=swapPairs(temp.next);
         temp.next=head;
         return temp;
-
     }
 }
