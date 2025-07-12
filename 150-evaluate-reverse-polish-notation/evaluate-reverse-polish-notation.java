@@ -19,37 +19,28 @@ class Solution {
     public int evalRPN(String[] tokens) {
         int n=tokens.length;
         Stack<Integer> stck=new Stack<>();
-        int i=0;
-       while(i<n){
-            while((i<n) && (!tokens[i].equals("+")) && (!tokens[i].equals("*")) && (!tokens[i].equals("-")) && (!tokens[i].equals("/"))){
-                stck.push(Integer.parseInt(tokens[i]));
-                i++;
-            }
-            if(stck.size()>=2){
-                int A=stck.pop();
-                int B=stck.pop();
-                     if(tokens[i].equals("+")){
-                    int C=Add(A,B);
-                    stck.push(C);
+        for(String token:tokens){
+            if(token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")){
+                    int A=stck.pop();
+                    int B=stck.pop();
+                    int C=0;
+                    if(token.equals("+")){
+                         C=Add(A,B);
                     }
-                    else if(tokens[i].equals("-")){
-                        int C=subtract(A,B);
-                        stck.push(C);
+                    else if(token.equals("-")){
+                        C=subtract(A,B);
                     }
-                    else if(tokens[i].equals("*")){
-                        int C=multiply(A,B);
-                        stck.push(C);
+                    else if(token.equals("*")){
+                        C=multiply(A,B);
                     }
                     else{
-                        int C=divide(A,B);
-                        stck.push(C);
+                         C=divide(A,B);
                     }
-                }
-                else{
-                    break;
-                }
-                i++;
-
+                    stck.push(C);
+            }
+            else{
+                stck.push(Integer.valueOf(token));
+            }
         }
         if(!stck.isEmpty()){
             return stck.pop();
