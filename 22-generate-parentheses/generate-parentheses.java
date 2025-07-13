@@ -1,5 +1,5 @@
 class Solution {
-    public boolean isValid(String curr){
+    public boolean isValid(StringBuilder curr){
         int sum=0;
         for(int i=0;i<curr.length();i++){
             if(curr.charAt(i)=='('){
@@ -14,10 +14,10 @@ class Solution {
         }
         return sum==0;
     }
-    public void solve(String curr, List<String> res, int n){
+    public void solve(StringBuilder curr, List<String> res, int n){
 
         if(curr.length()==2*n){
-            System.out.println(curr);
+            System.out.println(curr.toString());
             if(isValid(curr)){
             res.add(curr.toString());
             
@@ -26,17 +26,16 @@ class Solution {
             
         }
 
-        curr=curr+"(";
+        curr=curr.append('(');
         solve(curr, res,n);
-        curr=curr.substring(0,curr.length()-1);
+        curr.deleteCharAt(curr.length()-1);
 
-        curr=curr+")";
+        curr=curr.append(')');
         solve(curr, res,n);
-      
-      
+        curr.deleteCharAt(curr.length()-1);
     }
     public List<String> generateParenthesis(int n) {
-        String curr="";
+        StringBuilder curr=new StringBuilder();
 
         List<String> res=new ArrayList<>();
         solve(curr,res,n);
