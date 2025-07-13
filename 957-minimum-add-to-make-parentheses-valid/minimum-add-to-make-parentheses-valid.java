@@ -11,14 +11,14 @@ class Solution {
             }
             else{
                 if(ch==')' && !stck.isEmpty()){
-                    stck.pop();
+                    stck.pop(); //matched open nd close brackets
                 }
                 else if(ch==')' && stck.isEmpty()){
-                    close++;
+                    close++; //you can't find a match
                 } 
             }
             i++;
         }
-        return close+stck.size();
+        return close+stck.size(); //left unmatched brackets+earlier closed ones left out
     }
 }
