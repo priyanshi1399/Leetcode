@@ -32,7 +32,7 @@ class Solution {
 
         curr=curr+")";
         solve(curr, res,n);
-        curr=curr.substring(0,curr.length()-1);
+      
       
     }
     public List<String> generateParenthesis(int n) {
