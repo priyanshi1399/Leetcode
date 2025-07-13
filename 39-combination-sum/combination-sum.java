@@ -2,7 +2,7 @@ class Solution {
     public void solve(List<List<Integer>> ans,int [] candidates,int target,List<Integer> temp,int index){
         if(target==0){
             ans.add(new ArrayList<>(temp));
-            
+            return;
         }
         if(target<0){
             return;
