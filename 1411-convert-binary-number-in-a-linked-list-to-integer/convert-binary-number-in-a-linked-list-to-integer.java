@@ -10,29 +10,21 @@
  */
 class Solution {
     public int getDecimalValue(ListNode head) {
+        int size=0;
         ListNode temp=head;
-        StringBuilder str=new StringBuilder();
         while(temp!=null){
-            str.append(temp.val);
+            size++;
             temp=temp.next;
         }
-        String ans=str.reverse().toString();
-        int n=ans.length();
-        int [] power=new int[n];
-        power[0]=1;
-        for(int i=1;i<n;i++){
-            power[i]=power[i-1]*2;
-        }
+
+        temp=head;
         int res=0;
-        for(int i=0;i<n;i++){
-            char ch=ans.charAt(i);
-            if(ch=='1'){
-                res+=1*power[i];
-            }
+        while(temp!=null && size>=0){
+            res+=temp.val*Math.pow(2,size-1);
+            size--;
+            temp=temp.next;
         }
         return res;
-
-
 
     }
 }
