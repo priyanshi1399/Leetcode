@@ -10,21 +10,12 @@
  */
 class Solution {
     public int getDecimalValue(ListNode head) {
-        int size=0;
+        int result=0;
         ListNode temp=head;
         while(temp!=null){
-            size++;
+            result=((result<<1)  | (temp.val));
             temp=temp.next;
         }
-
-        temp=head;
-        int res=0;
-        while(temp!=null && size>=0){
-            res+=temp.val*Math.pow(2,size-1);
-            size--;
-            temp=temp.next;
-        }
-        return res;
-
+        return result;
     }
 }
