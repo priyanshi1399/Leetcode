@@ -1,17 +1,26 @@
 class Solution {
-    public boolean canJump(int[] nums) {
-        int n=nums.length;      
-        int i=0;
-        int maxIndex=0;
-        while(i<n){
-            if(i<=maxIndex){
-                maxIndex=Math.max(maxIndex,i+nums[i]);
-            }
-            if(maxIndex>=n-1){
+    public boolean solve(int index,int n,int [] nums,int [] dp){
+        if(index>=n-1){
+            return true;
+        }
+        if(dp[index]!=-1){
+            return dp[index]==0;
+        }
+
+        for(int i=1;i<=nums[index];i++){
+            if(solve(index+i,n,nums,dp)==true){
+                 dp[index]=0;
                 return true;
             }
-            i++;
         }
+        dp[index]=1;
         return false;
+
+    }
+    public boolean canJump(int[] nums) {
+        int n=nums.length;
+        int [] dp=new int[n+1];
+        Arrays.fill(dp,-1);
+        return solve(0,n,nums,dp);
     }
 }
