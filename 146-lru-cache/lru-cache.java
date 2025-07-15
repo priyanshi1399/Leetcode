@@ -1,91 +1,36 @@
-class Node{
-    public int val,key;
-    public Node next,prev;
-    public Node(){
-        val=key=-1;
-        next=prev=null;
-    }
-    public Node(int key,int val){
-        this.key=key;
-        this.val=val;
-        next=prev=null;
-    }
-}
 class LRUCache {
-
     int cap;
-    Map<Integer,Node> map;
-    Node head;
-    Node tail;
-  
-    public void deleteNode(Node node){
-        Node prevNode=node.prev;
-        Node nextNode=node.next;
-
-        prevNode.next=nextNode;
-        nextNode.prev=prevNode;
-    }
-
-    public void insertAfterHead(Node node){
-     
-        Node nextNode=head.next;
-        node.prev=head;
-        head.next=node;
-        node.next=nextNode;
-        nextNode.prev=node;
-
-    }
-
-
+    Queue<Integer> q;
+    HashMap<Integer,Integer> map;
     public LRUCache(int capacity) {
         cap=capacity;
+        q=new LinkedList<>();
         map=new HashMap<>();
-        head=new Node();
-        tail=new Node();
-     
-        //linking
-        head.next=tail;
-        tail.prev=head;
-
     }
     
     public int get(int key) {
-        if(!map.containsKey(key)){
-            return -1;
+        if(map.containsKey(key)){
+            int value=map.get(key);
+            q.remove(key);
+            q.add(key);
+            return value;
         }
-
-        Node node=map.get(key);
-        int value=node.val;
-
-        deleteNode(node);
-        insertAfterHead(node);
-        return value;
-
+        return -1;
     }
     
     public void put(int key, int value) {
         if(map.containsKey(key)){
-            Node node=map.get(key);
-            node.val=value;
-
-
-            deleteNode(node);
-            map.put(key,node);
-            insertAfterHead(node);
+            q.remove(key);
+            map.put(key,value);
+            q.add(key);
             return;
-            
         }
         else if(map.size()>=cap){
-            Node node=tail.prev;
-
-            int keyToRemove=node.key;
+            int keyToRemove=q.poll();
             map.remove(keyToRemove);
-            deleteNode(node);
         }
-        Node newNode=new Node(key,value);
-        map.put(key,newNode);
-        insertAfterHead(newNode);
-        return;
+        map.put(key,value);
+        q.add(key);
     }
 }
 
