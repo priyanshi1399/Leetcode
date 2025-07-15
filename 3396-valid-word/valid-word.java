@@ -1,20 +1,12 @@
 class Solution {
-    public int checkVowel(char ch){
-        int countVowel=0;
-         if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u' || ch=='A' || ch=='E' || ch=='I' || ch=='O' || ch=='U'){
-                countVowel++;
-            }
-            return countVowel;
+  
+        
+    public boolean checkVowel(char ch){
+        if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u' || ch=='A' || ch=='E' || ch=='I' || ch=='O' || ch=='U'){
+               return true;
         }
-    
-
-    public int checkCons(char ch){
-        int countConst=0;
-         if(ch!='a'&& ch!='e' && ch!='i' && ch!='o' && ch!='u' && ch!='A' && ch!='E' && ch!='I' &&ch!='O'  && ch!='U'){
-                countConst++;
-            }
-            return countConst;
-        }
+            return false;
+    }
 
     public boolean isValid(String word) {
         int n=word.length();
@@ -23,27 +15,23 @@ class Solution {
         }
         int countVowel=0;
         int countCons=0;
-        
+
         for(int i=0;i<n;i++){
             char ch=word.charAt(i);
             if(Character.isDigit(ch)){
-                continue;
+                continue; //it will pass that character
+            }
+            if(checkVowel(ch)){
+                countVowel++; //if vowel wlse const bcz didits I already passsed
             }
             else{
-             countVowel+=checkVowel(ch);
-             countCons+=checkCons(ch);
-
+                countCons++;
+            }
+            if(countVowel>=1 && countCons>=1){
+                return true; //early return
+            }
         } 
-        }
-        System.out.println(countVowel);
-        System.out.println(countCons);
-
-
-    
-    if(countVowel<1 || countCons<1){
+        
         return false;
     }
-    return true;
-    }
-    
-}
+}   
