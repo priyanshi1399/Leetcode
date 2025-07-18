@@ -1,6 +1,6 @@
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        Arrays.sort(intervals,(a,b)->Integer.compare(a[0],b[0]));
+        Arrays.sort(intervals,(a,b)->Integer.compare(a[0],b[0])); //for concurrent interval to come at once 
         int n=intervals.length;
         int i=0;
         List<int[]> res=new ArrayList<>();
@@ -15,7 +15,7 @@ class Solution {
             i++;
         }
 
-        res.add(newInterval);
+        res.add(newInterval); //[3,5],[6,7],[8,10],[12,16]-->[3,10]
     
 
         while(i<n){
