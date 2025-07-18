@@ -9,29 +9,24 @@ class Solution {
         });
         int n=intervals.length;
         int cnt=0;
-        int i=0;
-        int j=1;
-        while(j<n){
-            int currentstart=intervals[i][0];
-            int currentend=intervals[i][1];
-            int nextstart=intervals[j][0];
-            int nextend=intervals[j][1];
-
-            if(currentend<=nextstart){
-                i=j;
-                j++;
+        int [] lastInterval=intervals[0];
+        int i=1;
+        while(i<n){
+            int curr_start=intervals[i][0];
+            int curr_end=intervals[i][1];
+            int last_end=lastInterval[1];
+            if(last_end<=curr_start){ //this is safe
+                lastInterval=intervals[i];
             }
-            else if(currentend<=nextend){ //[0,4],[2,7] remove bigger one
-                j++;
-                cnt++;
+            else if(lastInterval[1]<=curr_end){
+                    cnt++; //drop greedly and move forward
             }
-            else if(currentend>nextend){ //[0,7][2,3] //0,7 will be deleted i will be at 0,7 and j ->2,3
-                i=j;
-                j++;
-                cnt++;
+            else if(last_end>curr_end){
+                    lastInterval=intervals[i]; //remove the previous greater interval
+                    cnt++;
             }
+            i++; //i increases at every step
         }
-            
         return cnt;
     }
 }
