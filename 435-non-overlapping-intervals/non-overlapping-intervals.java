@@ -4,24 +4,34 @@ class Solution {
             int first=a[0];
             int second=b[0];
 
-            return Integer.compare(a[1],b[1]);
+            return Integer.compare(a[0],b[0]);
 
         });
         int n=intervals.length;
         int cnt=0;
-        int prev=0;
-        int curr=1;
-        for(int i=0;i<n-1;i++){
-            
-            if( intervals[prev][1]<=intervals[curr][0]){
-                prev=curr;
-                curr++;
+        int i=0;
+        int j=1;
+        while(j<n){
+            int currentstart=intervals[i][0];
+            int currentend=intervals[i][1];
+            int nextstart=intervals[j][0];
+            int nextend=intervals[j][1];
+
+            if(currentend<=nextstart){
+                i=j;
+                j++;
             }
-            else{
+            else if(currentend<=nextend){ //[0,4],[2,7] remove bigger one
+                j++;
                 cnt++;
-                curr++;
+            }
+            else if(currentend>nextend){ //[0,7][2,3] //0,7 will be deleted i will be at 0,7 and j ->2,3
+                i=j;
+                j++;
+                cnt++;
             }
         }
+            
         return cnt;
     }
 }
