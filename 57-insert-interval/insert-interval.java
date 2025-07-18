@@ -1,5 +1,6 @@
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
+        Arrays.sort(intervals,(a,b)->Integer.compare(a[0],b[0]));
         int n=intervals.length;
         int i=0;
         List<int[]> res=new ArrayList<>();
