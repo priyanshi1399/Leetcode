@@ -1,38 +1,49 @@
 class MedianFinder {
-    PriorityQueue<Integer> leftMaxHeap;
-    PriorityQueue<Integer> rightMinHeap;
+    List<Integer> list;
     public MedianFinder() {
-        leftMaxHeap=new PriorityQueue<>(Collections.reverseOrder());
-        rightMinHeap=new PriorityQueue<>();
+        list=new ArrayList<>();
     }
     
     public void addNum(int num) {
-        if(leftMaxHeap.isEmpty() || num<leftMaxHeap.peek()){
-            leftMaxHeap.add(num);
+        int index=0;
+        if(list.size()==0){
+            list.add(num);
+        }
+        else if(num>=list.get(list.size()-1)){
+            list.add(num);
         }
         else{
-            rightMinHeap.add(num);
+        int i=0;
+        while(i<list.size()){
+            while(i<list.size() && list.get(i)<=num){
+                index=i;
+                i++;
+            }
+            break;
         }
-
-        // we have to maintain the size of the heaps leftMaxHeap should be one greater or both should be equal
-        if(Math.abs(leftMaxHeap.size()-rightMinHeap.size())>1){ //untill its not greater than 1
-            //take elment from the leftMaxHeap and add it to rightMinHeap
-            rightMinHeap.add(leftMaxHeap.poll());
-        } 
-        // if leftMaxHeap<rightMinHeap it should be there
-        else if(leftMaxHeap.size()<rightMinHeap.size()){
-             leftMaxHeap.add(rightMinHeap.poll());
+        if(i==list.size()){
+            list.add(num);
         }
-
+        else{
+            list.add(i,num);
+        }
+        }
+        
     }
     
     public double findMedian() {
-        //if size are euqual that means take top from both
-        if(leftMaxHeap.size()==rightMinHeap.size()){
-            double mean= ((double)(leftMaxHeap.peek()+rightMinHeap.peek())/2);
-            return mean;
+        int size=list.size();
+        double median;
+        if(size%2==0){
+            int middle=list.get(size/2);
+            int middleNext=list.get((size/2)-1);
+             median=((double)(middle+middleNext)/2);
         }
-        return (double)leftMaxHeap.peek();
+        else{
+            int half=size/2;
+            median=(double)list.get(size/2);
+        }
+        return median;
     }
 }
 
