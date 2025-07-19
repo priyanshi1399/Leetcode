@@ -1,5 +1,5 @@
 class Solution {
-    private final long mod=100_00_00_007;
+    private final int mod=100_00_00_007;
     public long findPower(long a,long b){
         if(b==0){
             return 1;
