@@ -21,12 +21,7 @@ class MedianFinder {
             }
             break;
         }
-        if(i==list.size()){
-            list.add(num);
-        }
-        else{
-            list.add(i,num);
-        }
+        list.add(i,num);
         }
         
     }
