@@ -13,17 +13,21 @@ class Solution {
         if(head==null || head.next==null){
             return head;
         }
-        ListNode temp=head.next; //2-->3-->4
-        head.next=swapPairs(temp.next);
-        temp.next=head;
-        return temp;
+
+        ListNode dummy=new ListNode(0);
+        ListNode prev=dummy;
+        prev.next=head;
+
+        ListNode curr=head;
+        while(curr!=null && curr.next!=null){
+            ListNode f=curr.next;
+            curr.next=f.next;
+            f.next=curr;
+            prev.next=f;
+            prev=curr;
+            curr=curr.next;
+        }
+        return dummy.next;
     }
 }
-
-/*
-head
-1--->2-->3-->4 --given
-
-2-->1-->     4-->3 --result
-*/
 
