@@ -16,41 +16,43 @@ class Node {
 class Solution {
     public Node copyRandomList(Node head) {
         if(head==null){
-            return null;
+            return head;
         }
-        Node prev=null;
-        Node newHead=null;
-        HashMap<Node,Node> map=new HashMap<>();
-
         Node curr=head;
-        while(curr!=null){
-            Node temp=new Node(curr.val); //make a node
-            map.put(curr,temp); //store it
-            if(newHead==null){
-                newHead=temp;
-                prev=newHead;
-            }
-            else{
-                prev.next=temp;
-                prev=prev.next;
-            }
-            curr=curr.next;
+        //inserting node in between
+        while(curr!=null){ //A-->B
+            Node nextNode=curr.next; //store it because we have to connect after
+            curr.next=new Node(curr.val);
+            curr.next.next=nextNode;
+            curr=nextNode; //now curr is at nextNode
         }
 
-        //now fill the random 
-
+        // fill the random
         curr=head;
-        Node newCurr=newHead;
-        while(curr!=null && newCurr!=null){
+        while(curr!=null && curr.next!=null){
             if(curr.random==null){
-                newCurr.random=null;
+                curr.next.random=null;
             }
             else{
-                newCurr.random=map.get(curr.random);
+                curr.next.random=curr.random.next; //go to curr's random then go to next
             }
+            curr=curr.next.next;
+        }
+
+        //sepearte list to get the answer
+        curr=head;
+        Node newHead=curr.next;
+        Node newCurr=newHead;
+
+        while(curr!=null && newCurr!=null){
+            curr.next=(curr.next!=null)?curr.next.next:null;
+            newCurr.next=(newCurr.next!=null)?newCurr.next.next:null;
+
             curr=curr.next;
             newCurr=newCurr.next;
         }
         return newHead;
+
+
     }
 }
