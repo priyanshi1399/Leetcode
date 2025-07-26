@@ -16,17 +16,13 @@ class Solution {
         return str.toString();
 
     }
-    public String solve(int n){
+
+    public String countAndSay(int n) {
         if(n==1){
             return "1";
         }
 
-        String ans=solve(n-1);
+        String ans=countAndSay(n-1);
         return countAndAppend(ans);
-       
-
-    }
-    public String countAndSay(int n) {
-        return solve(n);
     }
 }
