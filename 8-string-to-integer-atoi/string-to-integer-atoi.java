@@ -8,13 +8,12 @@ class Solution {
         }
 
         int sign=1;
-        if(i<n && (s.charAt(i)=='+' || s.charAt(i)=='-')){
-            if(s.charAt(i)=='-'){
-                sign=-1;
-            }
-            else{
+        if(i<n && s.charAt(i)=='+'){
                 sign=1;
-            }
+                i++;
+        }
+        else if(i<n && s.charAt(i)=='-'){
+            sign=-1;
             i++;
         }
       
@@ -27,7 +26,10 @@ class Solution {
         if(sign==-1){
             sum=sum*-1;
         }
+        sum= sum>=Integer.MAX_VALUE?Integer.MAX_VALUE:sum;
+        sum= sum<=Integer.MIN_VALUE?Integer.MIN_VALUE:sum;
         return (int)sum;
+
 
 
     }
