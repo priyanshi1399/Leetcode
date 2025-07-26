@@ -3,13 +3,13 @@ class Solution {
         StringBuilder str=new StringBuilder();
         for(int i=0;i<ans.length();i++){
             int count=1;
-            String num=String.valueOf(ans.charAt(i));
+            char ch=ans.charAt(i);
             while(i+1<ans.length() && ans.charAt(i)==ans.charAt(i+1)){
                 count++;
                 i++;
             }
-            str.append(String.valueOf(count));
-            str.append(num);
+            str.append(count);
+            str.append(ch);
 
         }
         
@@ -17,12 +17,11 @@ class Solution {
 
     }
     public String solve(int n){
-        if(n==1 || n==0){
+        if(n==1){
             return "1";
         }
 
         String ans=solve(n-1);
-        System.out.println(ans);
         return countAndAppend(ans);
        
 
