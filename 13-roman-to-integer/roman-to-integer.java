@@ -13,20 +13,16 @@ class Solution {
         }
         int sum=0;
         for(int i=0;i<n;i++){
-            char ch=s.charAt(i);
-            if(i+1<n && map.get(ch)>=map.get(s.charAt(i+1))){
-                sum+=map.get(ch);
-            }
-
-            else if(i+1<n && map.get(ch)<map.get(s.charAt(i+1))){
-                 sum+=map.get(s.charAt(i+1))-map.get(s.charAt(i));
-                i++;
-            }
-            else if(i==n-1){
-                sum+=map.get(s.charAt(i));
-            }
-        }
+           int curr=map.get(s.charAt(i));
+           int next=(i+1<n)?map.get(s.charAt(i+1)):0;
         
+        if(curr<next){
+            sum-=curr;
+        }
+        else{
+            sum+=curr;
+        }
+    }
         return sum;
 
 
