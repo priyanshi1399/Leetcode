@@ -1,5 +1,5 @@
 class Trie {
-    class TrieNode{
+    static class TrieNode{
         boolean endOfWord;
         TrieNode [] children;
 
