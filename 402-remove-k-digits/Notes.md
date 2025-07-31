@@ -1,1 +1,1 @@
-<h2>remove-k-digits Notes</h2><hr>[ Time taken: 11 m 24 s ]
+<h2>remove-k-digits Notes</h2><hr>[ Time taken: 1 hr 6 m 17 s ]
