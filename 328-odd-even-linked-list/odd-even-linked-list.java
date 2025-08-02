@@ -10,22 +10,21 @@
  */
 class Solution {
     public ListNode oddEvenList(ListNode head) {
-        if(head==null || head.next==null){
-            return head;
+        if(head==null){
+            return null;
         }
         ListNode odd=head;
         ListNode even=head.next;
-        ListNode evenHead=head.next; //stored to connect later
+        ListNode evenHead=head.next;//storing for further addition
 
         while(even!=null && even.next!=null){
-            odd.next=odd.next.next; //1->3->5
-            even.next=even.next.next; //2->4
-             //2 is sepearted so before only we have stored it
+            odd.next=odd.next.next;
+            even.next=even.next.next;
             odd=odd.next;
             even=even.next;
         }
+
         odd.next=evenHead;
         return head;
-
     }
 }
