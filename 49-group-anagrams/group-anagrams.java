@@ -19,9 +19,7 @@ class Solution {
         HashMap<String,List<String>> map=new HashMap<>();
         for(int i=0;i<strs.length;i++){
             String sortedStr=sorted(strs[i]);
-            if(!map.containsKey(sortedStr)){
-                 map.put(sortedStr,new ArrayList<>());
-            }
+            map.putIfAbsent(sortedStr,new ArrayList<>());
             map.get(sortedStr).add(strs[i]);
 
         }
