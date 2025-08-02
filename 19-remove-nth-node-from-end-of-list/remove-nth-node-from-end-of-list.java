@@ -10,25 +10,29 @@
  */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head==null || head.next==null){
+            return null;
+        }
         ListNode fast=head;
         while(n!=0){
             n--;
-            fast=fast.next; //move fast till previous point 
-            
+            fast=fast.next; //take fast till prev point
         }
 
-        // slow and fast will move simultaneously
-        if(fast==null){ //when n==size
+        ListNode slow=head;
+        while(fast!=null && fast.next!=null){
+            fast=fast.next;
+            slow=slow.next;
+        }
+
+        if(fast==null){
             return head.next;
         }
-        ListNode slow=head;
-        while(fast.next!=null){
-            slow=slow.next;
-            fast=fast.next;
-        }
-        ListNode deleteNode=slow.next; //store the node to delete
+
+        ListNode nodeToDelete=slow.next;
         slow.next=slow.next.next;
         return head;
+
 
     }
 }
