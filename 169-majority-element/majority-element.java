@@ -1,23 +1,21 @@
 class Solution {
     public int majorityElement(int[] nums) {
         int n=nums.length;
-        int count=1;
-        int majEle=nums[0];
+        int count=0;
+        int majEle=0;
 
-        for(int i=1;i<n;i++){
-            if(nums[i]==majEle){
-                count++;
+        for(int i=0;i<n;i++){
+            if(nums[i]==majEle){ //if it is the same element
+                    count++;
             }
             else if(count==0){
-                majEle=nums[i];
+                majEle=nums[i]; //assign to that number
                 count=1;
             }
-            else{
+            else {
                 count--;
             }
         }
         return majEle;
-
-
     }
 }
