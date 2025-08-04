@@ -3,17 +3,22 @@ class Solution {
         if(s.length()!=t.length()){
             return false;
         }
-        char [] sArray=s.toCharArray();
-        char  []tArray=t.toCharArray();
-
-        Arrays.sort(sArray);
-        Arrays.sort(tArray);
-
-        for(int i=0;i<sArray.length;i++){
-            if(sArray[i]!=tArray[i]){
-                return false;
-            }
+        HashMap<Character,Integer> sMap=new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            sMap.put(ch,sMap.getOrDefault(ch,0)+1);
         }
-        return true;
+
+       for(int i=0;i<t.length();i++){
+        char ch=t.charAt(i);
+            if(sMap.containsKey(ch)){
+                sMap.put(ch,sMap.getOrDefault(ch,0)-1);
+                if(sMap.get(ch)==0){
+                    sMap.remove(ch);
+                }
+            }
+       }
+       return sMap.size()==0;
+       
     }
 }
