@@ -9,25 +9,19 @@ class Solution {
                 stck.pop(); //pop if found greater number on top
                 k--;
            }
-
            if(!stck.isEmpty() || ch!='0'){ //if stack is Empty then ignore 0 else put
             stck.push(ch);
            }
         }
-
         String ans=""; //take String for result
         while(!stck.isEmpty() && k>0){
             stck.pop(); // if numbers are in increasing order remove from last
             k--;
         }
-
         while(!stck.isEmpty()){
                 ans=stck.pop()+ans; //number will append from last e.g "200"
         }
         return ans.length()>0?ans:"0";
-
         
     }
-
-
 }
