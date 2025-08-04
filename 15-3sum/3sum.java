@@ -28,7 +28,7 @@ class Solution {
                 k--;
                 }
             }
-            while(i+1<n && nums[i]==nums[i+1]){
+            while(i+1<=n-3 && nums[i]==nums[i+1]){
                 i++;
             }
         }
