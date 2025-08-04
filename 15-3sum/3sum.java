@@ -4,6 +4,9 @@ class Solution {
         Arrays.sort(nums); //sort it so that same element comes together
         List<List<Integer>> res=new ArrayList<>();
         for(int i=0;i<=n-3;i++){
+            if(i>0 && nums[i-1]==nums[i]){
+                continue;
+            }
             int j=i+1;
             int k=n-1;
 
@@ -27,9 +30,6 @@ class Solution {
                 j++;
                 k--;
                 }
-            }
-            while(i+1<=n-3 && nums[i]==nums[i+1]){
-                i++;
             }
         }
         return res;
