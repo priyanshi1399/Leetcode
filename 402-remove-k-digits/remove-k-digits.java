@@ -1,27 +1,25 @@
 class Solution {
     public String removeKdigits(String num, int k) {
+        StringBuilder ans=new StringBuilder(); //take String for result
         int n=num.length();
-        Stack<Character> stck=new Stack<>();
         if(n==k) return "0"; //if length and k is same return "0"
         for(int i=0;i<n;i++){
-            char ch=num.charAt(i);
-           while(!stck.isEmpty() && stck.peek()>ch && k>0){
-                stck.pop(); //pop if found greater number on top
-                k--;
-           }
-           if(!stck.isEmpty() || ch!='0'){ //if stack is Empty then ignore 0 else put
-            stck.push(ch);
-           }
+            while(ans.length()>0 && ans.charAt(ans.length()-1)>num.charAt(i) && k>0){
+                ans.deleteCharAt(ans.length()-1); //remove number from last ->"14" and "3" is to come remove 4
+                k--; //decrease k value
+            }
+
+            if(ans.length()>0 || num.charAt(i)!='0'){
+                ans.append(num.charAt(i)); // number starts with 0 then ignore else put 
+            }
         }
-        String ans=""; //take String for result
-        while(!stck.isEmpty() && k>0){
-            stck.pop(); // if numbers are in increasing order remove from last
+
+        while(ans.length()>0 && k>0){
+            ans.deleteCharAt(ans.length()-1); // if numbers are in increasing order remove from last
             k--;
         }
-        while(!stck.isEmpty()){
-                ans=stck.pop()+ans; //number will append from last e.g "200"
-        }
-        return ans.length()>0?ans:"0";
-        
+
+        return ans.length()>0 ?ans.toString() :"0"; //if empty return "0"
     }
+
 }
