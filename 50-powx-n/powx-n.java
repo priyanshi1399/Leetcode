@@ -16,7 +16,7 @@ class Solution {
 
     }
     public double myPow(double x, int n) {
-        double ans=solve(x,(long)n);
+        double ans=solve(x,n);
         return ans;
     }
 }
