@@ -1,14 +1,21 @@
 class Solution {
-    public boolean binarySearch(int [] row,int target){
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m=matrix.length;
+        int n=matrix[0].length;
+        //trying to flatten it into 1-D
         int l=0;
-        int h=row.length-1;
+        int h=m*n-1;
 
         while(l<=h){
             int mid=l+(h-l)/2;
-            if(row[mid]==target){
-                return true; //that exists in my row
+
+            int row=mid/n;
+            int col=mid%n;
+
+            if(matrix[row][col]==target){
+                return true;
             }
-            else if(row[mid]>target){
+            else if(matrix[row][col]>target){
                 h=mid-1;
             }
             else{
@@ -16,17 +23,6 @@ class Solution {
             }
         }
         return false;
-    }
-    public boolean searchMatrix(int[][] matrix, int target) {
-        int m=matrix.length; // size of row 
-        int n=matrix[0].length;  //size of column
 
-        for(int i=0;i<m;i++){
-                if(binarySearch(matrix[i],target)){
-                    return true;
-                }
-            }
-
-        return false;
     }
 }
