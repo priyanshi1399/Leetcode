@@ -3,23 +3,17 @@ class Solution {
         int m=matrix.length;
         int n=matrix[0].length;
         //trying to flatten it into 1-D
-        int l=0;
-        int h=m*n-1;
-
-        while(l<=h){
-            int mid=l+(h-l)/2;
-
-            int row=mid/n;
-            int col=mid%n;
-
-            if(matrix[row][col]==target){
+        int i=0;
+        int j=n-1;
+        while(i<m && j>=0){
+            if(matrix[i][j]==target){
                 return true;
             }
-            else if(matrix[row][col]>target){
-                h=mid-1;
+            else if(matrix[i][j]>target){
+                j--;
             }
             else{
-                l=mid+1;
+                i++;
             }
         }
         return false;
