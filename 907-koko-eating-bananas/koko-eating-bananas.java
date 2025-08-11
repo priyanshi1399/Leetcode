@@ -1,5 +1,5 @@
 class Solution {
-    public long canEatBanana(long mid,int [] piles){
+    public boolean isPossibleToEatBanana(long mid,int [] piles,int h){
         long sum=0;
         for(int i=0;i<piles.length;i++){
             if(piles[i]%mid==0){
@@ -10,7 +10,7 @@ class Solution {
             }
         }
         //System.out.println("The sum is"+sum);
-        return sum;
+        return sum<=h;
     }
     public int minEatingSpeed(int[] piles, int h) {
         long low=1; //atleast she willeat one banana
@@ -18,12 +18,11 @@ class Solution {
         long ans=-1;
         while(low<=high){
             long mid=low+(high-low)/2;
-            System.out.println(mid);
-            if(canEatBanana(mid,piles)<=h){
+            if(isPossibleToEatBanana(mid,piles,h)){
                 ans=mid;
                 high=mid-1;
             }
-            else if(canEatBanana(mid,piles)>h){
+            else {
                 low=mid+1;
             }
         }
