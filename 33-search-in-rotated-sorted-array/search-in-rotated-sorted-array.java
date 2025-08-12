@@ -18,20 +18,26 @@ class Solution {
         return -1;
 
     }
-    public int search(int[] nums, int target) {
-        int n=nums.length;
-        int pivot=-1;
-        for(int i=0;i<n;i++){
-            if(i+1<n && nums[i]>nums[i+1]){
-                pivot=i;
-                break;
+    public int findPivotIndex(int [] nums){
+        int l=0;
+        int h=nums.length-1;
+        while(l<h){
+            int mid=l+(h-l)/2;
+            if(nums[mid]>nums[h]){
+                l=mid+1;
+            }
+            else{
+                h=mid;
             }
         }
-        System.out.println(pivot);
-
-        int ans=binarySearch(0,pivot,nums,target);
+        return h;
+    }
+    public int search(int[] nums, int target) {
+        int n=nums.length;
+        int pivot=findPivotIndex(nums);
+        int ans=binarySearch(0,pivot-1,nums,target);
         if(ans==-1){
-            return binarySearch(pivot+1,n-1,nums,target);
+            return binarySearch(pivot,n-1,nums,target);
         }
         return ans;
     }
