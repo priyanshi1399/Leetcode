@@ -9,19 +9,19 @@ class Solution {
                 return mid;
             }
             else if(nums[low]<=nums[mid]){
-                if(nums[low]<=target && target<=nums[mid]){
-                        high=mid-1;
+                if(nums[low]<=target && target<=nums[mid]){ //target should be in left
+                        high=mid-1; //eliminate right side part
                 }
                 else{
-                    low=mid+1;
+                    low=mid+1; //eliminate left part
                 }
             }
             else{
                 if(nums[mid]<=target && target<=nums[high]){
-                    low=mid+1;
+                    low=mid+1; //eliminate left part
                 }
                 else{
-                    high=mid-1;
+                    high=mid-1; //eliminate right part
                 }
             }
         }
