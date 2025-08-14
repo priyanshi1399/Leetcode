@@ -8,6 +8,6 @@ class Solution {
             }
         }
 
-        return maxChar==' '?"":new String(new char[]{maxChar,maxChar,maxChar});
+        return maxChar==' '?"":String.valueOf(maxChar).repeat(3);
     }
 }
