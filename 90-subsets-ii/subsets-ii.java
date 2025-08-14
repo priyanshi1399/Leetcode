@@ -1,6 +1,7 @@
 class Solution {
     public void solve(int idx,int n,List<Integer> temp,int [] nums, List<List<Integer>> res){
        res.add(new ArrayList<>(temp)); //empty subset adding
+       System.out.println(temp);
        for(int i=idx;i<n;i++){
         if(i!=idx && nums[i]==nums[i-1]){
             continue; //skip the duplicates
