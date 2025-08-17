@@ -1,20 +1,22 @@
 class Solution {
     int n;
     public void backtrack(int [] candidates,int target,int idx,List<Integer> temp,List<List<Integer>> res){
-        if(target<0){
-            return;
-        }
-
+       if(idx>=n){
         if(target==0){
             res.add(new ArrayList<>(temp));
         }
-
-        for(int i=idx;i<n;i++){
-            temp.add(candidates[i]);
-            backtrack(candidates,target-candidates[i],i,temp,res);
+        return;
+       }
+       
+        if(candidates[idx]<=target){
+            temp.add(candidates[idx]);
+            backtrack(candidates,target-candidates[idx],idx,temp,res);
             temp.remove(temp.size()-1);
         }
+            backtrack(candidates,target,idx+1,temp,res);
     }
+        
+    
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         n=candidates.length;
         List<List<Integer>> res=new ArrayList<>();
