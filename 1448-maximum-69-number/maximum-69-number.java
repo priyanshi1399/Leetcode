@@ -1,18 +1,20 @@
 class Solution {
     public int maximum69Number (int num) {
-        int index=-1;
-        String number=Integer.toString(num);
-        StringBuilder builder=new  StringBuilder(number);
-        for(int i=0;i<number.length();i++){
-            if(number.charAt(i)!='9'){
-                index=i;
-                builder.setCharAt(index,'9');
-                break;
+        int placeValue=0;
+        int placeValueSix=-1;
+        int n=num;
+        while(n!=0){
+            int rem=n%10;
+            n=n/10;
+            if(rem==6){
+                placeValueSix=placeValue;
             }
+            placeValue++; //get from the right side to check place value
         }
-        if(index!=-1){
-            return Integer.parseInt(builder.toString());
+        if(placeValueSix!=-1){
+            return num+(3*(int)Math.pow(10,placeValueSix));
         }
         return num;
+
     }
 }
