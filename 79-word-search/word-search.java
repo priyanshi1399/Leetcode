@@ -19,8 +19,8 @@ class Solution {
             int y_=y+dir[1];
 
             if((isSafe(x_,y_,m,n,board)) && (board[x_][y_]!='$') && (board[x_][y_]==word.charAt(index+1))){
-                if(board[x_][y_]!='$' && solve(x_,y_,index+1,board,len, word)){
-                    board[x][y]='$';
+                if(solve(x_,y_,index+1,board,len, word)){
+                    board[x][y]=temp;
                     return true;
                 }
             }
