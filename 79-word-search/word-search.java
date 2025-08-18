@@ -1,13 +1,14 @@
 class Solution {
     public boolean solve(int x,int y, int index, char [][] board, String word){
         
+        if(index==word.length()){
+            return true;
+        }
         if(x>=board.length || y>=board[0].length || x<0 || y<0 || board[x][y]!=word.charAt(index) || board[x][y]=='$'){
             return false;
         }
 
-        if(index==word.length()-1 && board[x][y]==word.charAt(index)){
-            return true;
-        }
+        
 
         char temp=board[x][y];
         board[x][y]='$'; //replace with any character
