@@ -1,22 +1,22 @@
 class Solution {
-    public void solve(int idx,int n,List<Integer> temp,int [] nums, List<List<Integer>> res){
-       res.add(new ArrayList<>(temp)); //empty subset adding
-       System.out.println(temp);
-       for(int i=idx;i<n;i++){
-        if(i!=idx && nums[i]==nums[i-1]){
-            continue; //skip the duplicates
+    int n;
+    public void solve(int idx,int [] nums,List<List<Integer>> res, List<Integer> temp){
+        res.add(new ArrayList<>(temp));
+
+        for(int i=idx;i<n;i++){
+            if(i!=idx && nums[i]==nums[i-1]){
+                continue; 
+            }
+            temp.add(nums[i]);
+            solve(i+1,nums,res,temp);
+            temp.remove(temp.size()-1);
         }
-        temp.add(nums[i]); //add
-        solve(i+1,n,temp,nums,res); //explore
-        temp.remove(temp.size()-1); //undo
-       }
     }
     public List<List<Integer>> subsetsWithDup(int[] nums) {
-        int n=nums.length;
-        Arrays.sort(nums);// duplicate will be together
+        n=nums.length;
+        Arrays.sort(nums);
         List<List<Integer>> res=new ArrayList<>();
-        solve(0,n,new ArrayList<>(),nums,res);
+        solve(0,nums,res,new ArrayList<>());
         return res;
-
     }
 }
