@@ -1,15 +1,18 @@
 class Solution {
-    public void backtrack(int idx,int k,int n,List<Integer> temp,List<List<Integer>> res){
-        if(n==0 && temp.size()==k){
-            res.add(new ArrayList<>(temp));
+    public void backtrack(int idx,int k,int n,List<Integer> combinationSize,List<List<Integer>> res){
+        if(n==0 && combinationSize.size()==k){
+            res.add(new ArrayList<>(combinationSize));
             return;
         }
 
 
         for(int i=idx;i<=9;i++){
-            temp.add(i);
-            backtrack(i+1,k,n-i,temp,res);
-            temp.remove(temp.size()-1);
+            if(i>n || n<0 || combinationSize.size()>k){
+                break;
+            }
+            combinationSize.add(i);
+            backtrack(i+1,k,n-i,combinationSize,res);
+            combinationSize.remove(combinationSize.size()-1);
         }
     }
     public List<List<Integer>> combinationSum3(int k, int n) {
