@@ -2,11 +2,19 @@
 
 class Solution {
     String[] orderString(String s[], int n) {
-        String startString=s[0];
-        Arrays.sort(s);
-        String [] ans=new String[2];
-        ans[0]=s[0];
-        ans[1]=s[n-1];
-        return ans;
+        String min_String=s[0];
+        String max_String=s[0];
+        
+        for(int i=1;i<n;i++){
+            if(s[i].compareTo(min_String)<0){
+                min_String=s[i];
+            }
+            
+            if(s[i].compareTo(max_String)>0){
+                max_String=s[i];
+            }
+        }
+        
+        return new String[]{min_String,max_String};
     }
 }
