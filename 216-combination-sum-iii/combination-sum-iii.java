@@ -7,9 +7,6 @@ class Solution {
 
 
         for(int i=idx;i<=9;i++){
-            if(i>n){
-                break;
-            }
             temp.add(i);
             backtrack(i+1,k,n-i,temp,res);
             temp.remove(temp.size()-1);
