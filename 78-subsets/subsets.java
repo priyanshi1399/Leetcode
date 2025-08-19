@@ -1,17 +1,22 @@
 class Solution {
-    public List<List<Integer>> subsets(int[] nums) {
-        int n=nums.length;
-        List<List<Integer>> res=new ArrayList<>(); // result list
-        int subLimit=(int)Math.pow(2,n); // limit till here subset will be formed
-        for(int num=0;num<subLimit;num++){
-            List<Integer> temp=new ArrayList<>(); //taking temporary list
-            for(int bitIndex=0;bitIndex<n;bitIndex++){
-                if((num & (1<<bitIndex))!=0){ //checking bit is set 
-                    temp.add(nums[bitIndex]); //include that index element
-                }
-            }
-            res.add(temp);
+    int n;
+    public void solve(int idx,int [] nums,List<Integer> temp,List<List<Integer>> res){
+        if(idx>=n){
+            res.add(new ArrayList<>(temp));
+            return;
         }
+
+
+        temp.add(nums[idx]);
+        solve(idx+1,nums,temp,res);
+        temp.remove(temp.size()-1);
+        solve(idx+1,nums,temp,res);
+        
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        n=nums.length;
+        List<List<Integer>> res=new ArrayList<>();
+        solve(0,nums,new ArrayList<>(),res);
         return res;
     }
 }
