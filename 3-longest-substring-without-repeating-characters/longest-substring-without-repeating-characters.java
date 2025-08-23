@@ -3,23 +3,18 @@ class Solution {
         if(s.equals("")){
           return 0; 
         }
-        int j=0;
-        int i=0;
+        int left=0;
         int n=s.length();
         int maxLength=0;
         HashMap<Character,Integer> map=new HashMap<>();
-        while(j<n){
-            char ch=s.charAt(j);
-            while(map.containsKey(ch)){
-                map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)-1);
-                if(map.get(s.charAt(i))==0){
-                    map.remove(s.charAt(i));
-                }
-                i++;
+        for(int right=0;right<n;right++){
+            char ch=s.charAt(right);
+            if(map.containsKey(ch) && map.get(ch)>=left){
+                left=map.get(ch)+1;
             }
-            map.put(ch,map.getOrDefault(ch,0)+1);
-            maxLength=Math.max(maxLength,j-i+1);
-            j++;
+            
+            map.put(ch,right);
+            maxLength=Math.max(maxLength,right-left+1);
         }
         return maxLength;
     }
