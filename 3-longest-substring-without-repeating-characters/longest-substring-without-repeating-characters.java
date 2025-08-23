@@ -6,7 +6,7 @@ class Solution {
         int j=0;
         int i=0;
         int n=s.length();
-        int maxLength=1;
+        int maxLength=0;
         HashMap<Character,Integer> map=new HashMap<>();
         while(j<n){
             char ch=s.charAt(j);
