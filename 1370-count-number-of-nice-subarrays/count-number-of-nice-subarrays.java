@@ -1,18 +1,27 @@
 class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
+        int prevCount=0;
+        int oddCount=0;
         int n=nums.length;
         int result=0;
-        int sum=0;
-        HashMap<Integer, Integer> map=new HashMap<>();
-        map.put(0,1); // taken 1 for 0 odd subarray //take ex {1,2}
-        for(int i=0;i<n;i++){
-            sum+=nums[i]%2; //if odd add 1 if even add 0
-
-            if(map.containsKey(sum-k)){
-                result+=map.get(sum-k);
+        int i=0;
+        for(int j=0;j<n;j++){
+            
+            if(nums[j]%2!=0){
+                oddCount++;
+                prevCount=0; //reset for odd number
             }
-            map.put(sum,map.getOrDefault(sum,0)+1);
 
+            while(oddCount==k){
+                prevCount++;
+
+                if(i<n && nums[i]%2==1){ //if that was odd
+                    oddCount--;
+                }
+                i++;
+            }
+
+            result+=prevCount;
         }
         return result;
     }
