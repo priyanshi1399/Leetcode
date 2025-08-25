@@ -14,7 +14,7 @@ class Solution {
                 }
                 maxFruits=Math.max(maxFruits,sum);
             }
-            while(i<n && map.size()>2){
+            if(i<n && map.size()>2){
                 map.put(fruits[i],map.get(fruits[i])-1);
                 if(map.get(fruits[i])==0){
                     map.remove(fruits[i]);
