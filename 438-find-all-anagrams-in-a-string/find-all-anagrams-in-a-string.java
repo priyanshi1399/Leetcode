@@ -25,7 +25,7 @@ class Solution {
 
             letters[s.charAt(end)-'a']--; //removing as we traverse
 
-            while(end-start+1==k){ //fits in my window
+            if(end-start+1==k){ //fits in my window
                 if(checkAllValuesZero(letters)){
                     res.add(start);
                 }
