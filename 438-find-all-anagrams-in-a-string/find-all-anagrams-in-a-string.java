@@ -1,39 +1,40 @@
 class Solution {
-    public boolean bothArraysAreEqual(int [] sArray, int [] pArray){
+    public boolean checkAllValuesZero(int [] letters){
         for(int i=0;i<26;i++){
-            if(sArray[i]!=pArray[i]){
+            if(letters[i]!=0){
                 return false;
             }
         }
         return true;
     }
     public List<Integer> findAnagrams(String s, String p) {
-        int pLen=p.length();
+        int k=p.length();
         int sLen=s.length();
-         List<Integer> ans=new ArrayList<>();
-        if(pLen>sLen){
-            return ans;
+        List<Integer> res=new ArrayList<>();
+        if(k>sLen){
+            return res; //if p is greater than s
         }
-       
-       int [] countS=new int[26];
-       int [] countP=new int[26];
-        for(int i=0;i<pLen;i++){ //first calculate for 0 
-            countS[s.charAt(i)-'a']++;
-            countP[p.charAt(i)-'a']++;
-        }
-        if(Arrays.equals(countS,countP)){
-                ans.add(0);
-            }
-
-        for(int i=pLen;i<s.length();i++){ //first calculate for 0 
-            countS[s.charAt(i)-'a']++;
-            countS[s.charAt(i-pLen)-'a']--; //reducing previous index elements value
-            if(bothArraysAreEqual(countS,countP)){
-                ans.add(i-pLen+1);
-            }
-           
+        int [] letters=new int[26];
+        for(int i=0;i<k;i++){
+            letters[p.charAt(i)-'a']++; //fill the smallest one (p)
         }
 
-        return ans;
+        int end=0;
+        int start=0;
+        while(end<sLen){
+
+            letters[s.charAt(end)-'a']--; //removing as we traverse
+
+            while(end-start+1==k){ //fits in my window
+                if(checkAllValuesZero(letters)){
+                    res.add(start);
+                }
+                letters[s.charAt(start)-'a']++; //shifting the window
+                start++;
+            }
+            end++;
+
+        }
+        return res;
     }
 }
