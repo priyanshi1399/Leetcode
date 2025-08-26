@@ -3,7 +3,7 @@ class Solution {
         Stack<Integer> stck=new Stack<>();
         int n=op.length;
         for(int i=0;i<n;i++){
-            if(stck.size()>=2 && op[i].equals("+")){
+            if(op[i].equals("+")){
                 int B=stck.pop();
                 int A=stck.pop();
                 stck.push(A);
