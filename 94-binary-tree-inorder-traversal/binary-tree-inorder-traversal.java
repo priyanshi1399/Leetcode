@@ -14,21 +14,30 @@
  * }
  */
 class Solution {
-    public void inorder(List<Integer> res, TreeNode root){
-        if(root==null){
-            return;
-        }
-        inorder(res,root.left);
-        res.add(root.val);
-        inorder(res,root.right);
-
-    }
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res=new ArrayList<>();
-        if(root==null){
-            return res;
+        TreeNode curr=root;
+        while(curr!=null){
+            if(curr.left==null) {//if this is null itself will be the root need to add
+                res.add(curr.val);
+                curr=curr.right;
+            }
+            else{
+                TreeNode prev=curr.left;//assign prev node
+                while(prev.right!=null && prev.right!=curr){ //a link shoulod ot be there
+                        prev=prev.right;
+                }
+                if(prev.right==null){
+                    prev.right=curr;
+                    curr=curr.left; //move left because in inorder you want left first
+                }
+                else{
+                    prev.right=null; //break the link
+                    res.add(curr.val); //take curr value and move right;
+                    curr=curr.right;
+                }
+            }
         }
-        inorder(res,root);
         return res;
     }
 }
