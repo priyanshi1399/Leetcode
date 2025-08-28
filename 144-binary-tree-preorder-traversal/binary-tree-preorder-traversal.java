@@ -14,22 +14,33 @@
  * }
  */
 class Solution {
-    public void preorder(List<Integer> res, TreeNode root){
-        if(root==null){
-            return;
-        }
-
-        res.add(root.val);
-        preorder(res,root.left);
-        preorder(res,root.right);
-
-    }
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> res=new ArrayList<>();
-        if(root==null){
-            return res;
+        TreeNode curr=root;
+        while(curr!=null){
+            if(curr.left==null){
+                res.add(curr.val);
+                curr=curr.right;
+            }
+            else{
+                TreeNode prev=curr.left;
+                while(prev.right!=null && prev.right!=curr){
+                    prev=prev.right;
+                }
+                if(prev.right==null){
+                    //before moving to curr to its left add that value beacuse root will be first added
+                    prev.right=curr;
+                    res.add(curr.val); //added before moving to its left
+                    curr=curr.left;
+                }
+                else{
+                     //while prev.right==curr now
+                     //break the link
+                     prev.right=null;
+                     curr=curr.right;
+                }
+            }
         }
-        preorder(res,root);
         return res;
     }
 }
