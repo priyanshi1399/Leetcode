@@ -14,24 +14,23 @@
  * }
  */
 class Solution {
-    int maxSum=0;
-    public int solveDiameter(TreeNode root){
-        if(root==null){
-            return 0;
-        }
-        int left=solveDiameter(root.left);
-        int right=solveDiameter(root.right);
-        maxSum=Math.max(maxSum,left+right);
-        return 1+Math.max(left,right);
-
-    }
+      int max = Integer.MIN_VALUE;
     public int diameterOfBinaryTree(TreeNode root) {
-        
-        if(root==null){
-            return 0;
-        }
-        solveDiameter(root);
-        return maxSum;
-        
+    solve(root,0);    
+    return max;
     }
+    public int solve(TreeNode root, int path) {
+
+    if(root == null) {
+        return 0;
+    }
+    int left = solve(root.left, path);
+    int right = solve(root.right, path);
+    
+    //ok, the longest path passing through me is left + right
+    max = Math.max(max, left + right);
+    
+    //The height of the tree rooted at this node is 1(current node) plus the taller child’s height
+    return 1+Math.max(left,right);
+}
 }
