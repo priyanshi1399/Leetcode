@@ -23,23 +23,24 @@ class Solution {
         q.add(root);
         boolean flag=false;
         while(!q.isEmpty()){
-            int n=q.size();
-            List<Integer> temp=new ArrayList<>();
-            while(n-->0){
-                TreeNode curr=q.poll();
-                temp.add(curr.val);
+            int n=q.size(); //n=1 ,n=2
+            List<Integer> temp=new ArrayList<>(); //[]
+            while(n>0){ //1>0 ,2>0 ,2>0
+                TreeNode curr=q.poll(); //curr=3  curr=[9] curr=20 ,curr=15 ,curr=7
+                temp.add(curr.val); //temp-[3] ,temp-[9,20], temp-[15,7]
                 if(curr.left!=null){
-                    q.add(curr.left);
+                    q.add(curr.left); //1=[9]  q=[15]
                 }
                 if(curr.right!=null){
-                    q.add(curr.right);
+                    q.add(curr.right); //q=[9,20] q.size()=2; ,q=[15,7]
                 }
+                n--; //n=0 , n=1 n=0 ,n=1 n=0
             }
             if(flag){
-                Collections.reverse(temp);
+                Collections.reverse(temp); //[20,9]
             }
-            flag=!flag;
-            res.add(temp);
+            flag=!flag; //false //true
+            res.add(temp);// [[3], [20,9], [15,7]]
             
         }
         return res;
