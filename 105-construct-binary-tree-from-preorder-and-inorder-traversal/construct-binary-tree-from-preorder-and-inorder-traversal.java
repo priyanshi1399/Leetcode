@@ -17,24 +17,27 @@ class Solution {
     int idx=0;
     int n;
     HashMap<Integer,Integer> map=new HashMap<>();
-    public TreeNode solve(int [] preorder, int start,int end){
+    public TreeNode solve(int [] preorder,int [] inorder, int start,int end){
         if(start>end){
             return null;
         }
-        int i=map.get(preorder[idx]); //getting index
+        int i=0;
+        for(int index=0;index<n;index++){
+            if(inorder[index]==preorder[idx]){
+                i=index;
+                break;
+            }
+        }
         TreeNode root=new TreeNode(preorder[idx]); //making root from preorder index wise
         idx++;
-        root.left=solve(preorder,start,i-1);
-        root.right=solve(preorder,i+1,end);
+        root.left=solve(preorder,inorder,start,i-1);
+        root.right=solve(preorder,inorder,i+1,end);
         return root;
 
     }
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         
         n=preorder.length;
-        for(int i=0;i<n;i++){
-            map.put(inorder[i],i);
-        }
-        return solve(preorder,0,n-1);
+        return solve(preorder,inorder,0,n-1);
     }
 }
