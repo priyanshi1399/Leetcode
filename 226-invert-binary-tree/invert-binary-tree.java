@@ -14,25 +14,26 @@
  * }
  */
 class Solution {
-    public TreeNode solve(TreeNode root){
+    public void solve(TreeNode root){
         if(root==null){
-            return null;
+            return;
         }
-       
+        TreeNode temp=root.left;
+        root.left=root.right;
+        root.right=temp;
 
-       TreeNode temp=root.left;
-       root.left=root.right;
-       root.right=temp;
+        invertTree(root.left);
+        invertTree(root.right);
 
-        TreeNode left=solve(root.left); //now replaced nodes will be there means 7 will be at left -> 6 and 9 will be replaced first;
-        TreeNode right=solve(root.right);
-        return root;
     }
     public TreeNode invertTree(TreeNode root) {
         if(root==null){
             return root;
         }
-        return solve(root);
-        
+
+        solve(root);
+
+        return root;
+
     }
 }
