@@ -37,10 +37,19 @@ class Solution {
                 n--; //n=0 , n=1 n=0 ,n=1 n=0
             }
             if(flag){
-                Collections.reverse(temp); //[20,9]
+                int len=temp.size();
+                Integer [] arr=new Integer[len];
+                int index=0;
+                for(int i=len-1;i>=0;i--) {//[20,9]
+                    arr[index++]=temp.get(i);
+                }
+                res.add(Arrays.asList(arr)); // will be added in reverse [20,9]
+            }
+            else{
+                res.add(temp);// [[3], [15,7]]
             }
             flag=!flag; //false //true
-            res.add(temp);// [[3], [20,9], [15,7]]
+            
             
         }
         return res;
