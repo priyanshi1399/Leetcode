@@ -19,20 +19,23 @@ class Solution {
             return;
         }
         int len=curr.length(); //getting current length
-        curr.append(root.val); //root is not null append
-
-        if(root.left==null && root.right==null){ //its a leaf node
-                res.add(curr.toString());
+        if(len==0){
+            curr.append(root.val);
         }
         else{
             curr.append("->");
-            solve(root.left,res,curr);
-            solve(root.right,res,curr);
+            curr.append(root.val);
         }
+        if(root.left==null && root.right==null){ //its a leaf node
+                res.add(curr.toString());
+        }
+        
+      
 
-        //backtrack to previous length
+        if(root.left!=null) solve(root.left,res,curr);
+        if(root.right!=null) solve(root.right,res,curr);
+
         curr.setLength(len);
-
 
     }
     public List<String> binaryTreePaths(TreeNode root) {
