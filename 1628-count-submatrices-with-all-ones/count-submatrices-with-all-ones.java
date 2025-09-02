@@ -1,39 +1,39 @@
 class Solution {
-    public int OnesSubarrayCount(int [] row){
-        int consecutiveOnes=0;
+    public int countNumberOfOnes(int [] mask){
+        int consecutiveOne=0;
         int subCount=0;
-        for( int val:row){
-            if(val==0){
-                consecutiveOnes=0;
+        for(int i=0;i<mask.length;i++){
+
+            if(mask[i]==1){
+                consecutiveOne++;
             }
             else{
-                consecutiveOnes++;
+                consecutiveOne=0;
             }
-            subCount+=consecutiveOnes;
+            subCount+=consecutiveOne;
         }
         return subCount;
     }
     public int numSubmat(int[][] mat) {
-        
         int m=mat.length;
         int n=mat[0].length;
-        int totalCount=0;
+        int result=0;
         for(int topRow=0;topRow<m;topRow++){
-            int [] maskRow=new int[n]; //make maskRow for every row // 1 1 1 
+            int [] mask=new int[n]; //take mask and then fill 1
 
-            Arrays.fill(maskRow,1);
+            Arrays.fill(mask,1);
 
             for(int bottomRow=topRow;bottomRow<m;bottomRow++){
 
                 for(int col=0;col<n;col++){
 
-                    maskRow[col]=maskRow[col] & mat[bottomRow][col]; //taking & with evry consecutive first initlizae mask with 111  earlier
+                    mask[col]=mat[bottomRow][col] & mask[col]; //to calculate for every other row 
                 }
 
-                totalCount+=OnesSubarrayCount(maskRow); //calculating for every row
+                result+=countNumberOfOnes(mask);
             }
-        }
 
-        return totalCount;
+        }
+        return result;
     }
 }
