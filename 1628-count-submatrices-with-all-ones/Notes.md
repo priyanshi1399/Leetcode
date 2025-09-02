@@ -1,1 +1,1 @@
-<h2>count-submatrices-with-all-ones Notes</h2><hr>[ Time taken: 1 hr 42 m 27 s ]
+<h2>count-submatrices-with-all-ones Notes</h2><hr>[ Time taken: 23 m 36 s ]
