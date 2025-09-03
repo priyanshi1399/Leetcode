@@ -16,24 +16,28 @@
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res=new ArrayList<>();
+        if(root==null){
+            return res;
+        }
         TreeNode curr=root;
+
         while(curr!=null){
-            if(curr.left==null) {//if this is null itself will be the root need to add
+            if(curr.left==null){
                 res.add(curr.val);
                 curr=curr.right;
             }
             else{
-                TreeNode prev=curr.left;//assign prev node
-                while(prev.right!=null && prev.right!=curr){ //a link shoulod ot be there
-                        prev=prev.right;
+                TreeNode prev=curr.left;
+                while(prev.right!=null && prev.right!=curr){
+                    prev=prev.right;
                 }
                 if(prev.right==null){
                     prev.right=curr;
-                    curr=curr.left; //move left because in inorder you want left first
+                    curr=curr.left;
                 }
                 else{
-                    prev.right=null; //break the link
-                    res.add(curr.val); //take curr value and move right;
+                    prev.left=null;
+                    res.add(curr.val);
                     curr=curr.right;
                 }
             }
