@@ -2,36 +2,28 @@ class Solution {
     public int numberOfPairs(int[][] points) {
         int n=points.length;
         int result=0;
+        Arrays.sort(points,(a,b)->{
+            int val1=a[0];
+            int val2=b[0];
+
+            return (val1==val2)?Integer.compare(b[1],a[1]):Integer.compare(a[0],b[0]);
+        });
         for(int i=0;i<n;i++){
             int x1=points[i][0];
             int y1=points[i][1];
+            int yMax=Integer.MIN_VALUE; //keeping track of maximum till point: try {2,6}{4,4}{4,5}{6,2} till 5 it will not be include because it will be found inside
+            for(int j=i+1;j<n;j++){
 
-            for(int j=0;j<n;j++){
-                if(j==i){
+                int x2=points[j][0];
+                int y2=points[j][1];
+
+                if(y2>y1){
                     continue;
                 }
-            int x2=points[j][0];
-            int y2=points[j][1];
-
-            if(x2>=x1 && y2<=y1){
-                boolean hasPointsInside=false;
-                for(int k=0;k<n;k++){
-                    if(k==i || k==j){
-                        continue;
-                    }
-                    int x3=points[k][0];
-                    int y3=points[k][1];
-
-                    if((x3>=x1 && x3<=x2) && (y3>=y2 && y3<=y1)){
-                        hasPointsInside=true;
-                        break;
-                    }
-                }
-                if(!hasPointsInside){
+                if(y2>yMax){
                     result++;
+                    yMax=y2;
                 }
-            }
-
             }
         }
         return result;
