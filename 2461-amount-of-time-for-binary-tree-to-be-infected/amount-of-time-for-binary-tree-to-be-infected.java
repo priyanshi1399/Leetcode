@@ -14,20 +14,6 @@
  * }
  */
 class Solution {
-    public void inorder(TreeNode root,HashMap<TreeNode,TreeNode> map){
-        if(root==null){
-            return;
-        }
-        if(root.left!=null){
-            map.put(root.left,root);
-        }
-        inorder(root.left,map);
-        if(root.right!=null){
-            map.put(root.right,root);
-        }
-        inorder(root.right,map);
-
-    }
     public TreeNode makeNode(TreeNode root,int start){
         if(root==null){
             return null;
@@ -35,38 +21,50 @@ class Solution {
         if(root.val==start){
             return root;
         }
-
         TreeNode left=makeNode(root.left,start);
         if(left!=null){
-            return left;
+                return left;
         }
         return makeNode(root.right,start);
     }
+    public void convertToGraph(TreeNode curr,int parent,Map<Integer,List<Integer>> parentMap){
+        if(curr==null){
+            return ;
+        }
+
+        if(parent!=-1){
+            parentMap.computeIfAbsent(curr.val,k->new ArrayList<>()).add(parent);
+        }
+        if(curr.left!=null){
+            parentMap.computeIfAbsent(curr.val,k->new ArrayList<>()).add(curr.left.val);
+        }
+         if(curr.right!=null){
+            parentMap.computeIfAbsent(curr.val,k->new ArrayList<>()).add(curr.right.val);
+        }
+
+        convertToGraph(curr.left,curr.val,parentMap);
+        convertToGraph(curr.right,curr.val,parentMap);
+
+    }
     public int amountOfTime(TreeNode root, int start) {
-        HashMap<TreeNode,TreeNode> parentMap=new HashMap<>();
-        inorder(root,parentMap);
+        HashMap<Integer,List<Integer>> parentMap=new HashMap<>();
+        convertToGraph(root,-1,parentMap);
         TreeNode startNode=makeNode(root,start);
-        Queue<TreeNode> q=new LinkedList<>();
+        Queue<Integer> q=new LinkedList<>();
         HashSet<Integer> set=new HashSet<>();
-        q.add(startNode); //add to the queue
-        set.add(start); //add same value to the set
+
+        q.add(start);
+        set.add(start);
         int minute=0;
         while(!q.isEmpty()){
             int n=q.size();
             while(n-->0){
-                TreeNode curr=q.poll();
-                if((curr.left!=null) && (!set.contains(curr.left.val))){ //check ro left child
-                    q.add(curr.left);
-                    set.add(curr.left.val);
-                }
-                if((curr.right!=null) && (!set.contains(curr.right.val))){ //check for right child
-                    q.add(curr.right);
-                    set.add(curr.right.val);
-                }
-                if((parentMap.containsKey(curr)) && (!set.contains(parentMap.get(curr).val))){ //check for parent
-                    TreeNode temp=parentMap.get(curr);
-                    q.add(temp);
-                    set.add(temp.val);
+                int curr=q.poll();
+                for(int neighbour:parentMap.getOrDefault(curr,Collections.emptyList())){
+                    if(!set.contains(neighbour)){
+                        q.add(neighbour);
+                        set.add(neighbour);
+                    }
                 }
             }
             minute++;
