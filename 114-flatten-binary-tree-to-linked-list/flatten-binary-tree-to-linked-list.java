@@ -14,18 +14,25 @@
  * }
  */
 class Solution {
-    TreeNode prev=null;
     public void flatten(TreeNode root) {
+        Stack<TreeNode> stck=new Stack<>();
         if(root==null){
             return;
         }
-        flatten(root.right);
-        flatten(root.left);
-        root.right=prev;
-        root.left=null;
-        prev=root;
-        
-        
-        
+        stck.push(root);
+        while(!stck.isEmpty()){
+            TreeNode curr=stck.pop();
+            if(curr.right!=null){ //first put right because of LIFO
+                stck.push(curr.right);
+            }
+            if(curr.left!=null){
+                stck.push(curr.left);
+            }
+
+            if(!stck.isEmpty()){
+                curr.right=stck.peek(); //make right pointer node
+                curr.left=null;
+            }
+        }
     }
 }
