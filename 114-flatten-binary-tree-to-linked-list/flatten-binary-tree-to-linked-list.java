@@ -15,24 +15,19 @@
  */
 class Solution {
     public void flatten(TreeNode root) {
-        Stack<TreeNode> stck=new Stack<>();
-        if(root==null){
-            return;
-        }
-        stck.push(root);
-        while(!stck.isEmpty()){
-            TreeNode curr=stck.pop();
-            if(curr.right!=null){ //first put right because of LIFO
-                stck.push(curr.right);
-            }
+        TreeNode curr=root;
+        while(curr!=null){
             if(curr.left!=null){
-                stck.push(curr.left);
-            }
-
-            if(!stck.isEmpty()){
-                curr.right=stck.peek(); //make right pointer node
+                TreeNode prev=curr.left;
+                while(prev.right!=null){
+                    prev=prev.right;
+                }
+                prev.right=curr.right;
+                curr.right=curr.left;
                 curr.left=null;
+               
             }
+             curr=curr.right;                   
         }
     }
 }
