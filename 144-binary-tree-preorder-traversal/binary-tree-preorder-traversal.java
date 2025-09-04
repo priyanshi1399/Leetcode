@@ -15,8 +15,12 @@
  */
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> res=new ArrayList<>();
+          List<Integer> res=new ArrayList<>();
+        if(root==null){
+            return res;
+        }
         TreeNode curr=root;
+
         while(curr!=null){
             if(curr.left==null){
                 res.add(curr.val);
@@ -28,16 +32,13 @@ class Solution {
                     prev=prev.right;
                 }
                 if(prev.right==null){
-                    //before moving to curr to its left add that value beacuse root will be first added
                     prev.right=curr;
-                    res.add(curr.val); //added before moving to its left
+                    res.add(curr.val);
                     curr=curr.left;
                 }
                 else{
-                     //while prev.right==curr now
-                     //break the link
-                     prev.right=null;
-                     curr=curr.right;
+                    prev.left=null;
+                    curr=curr.right;
                 }
             }
         }
