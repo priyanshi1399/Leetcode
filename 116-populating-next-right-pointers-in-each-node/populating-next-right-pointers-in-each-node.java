@@ -31,8 +31,6 @@ class Solution {
         q.add(root);
         q.add(null);
         while(!q.isEmpty()){
-            int level=q.size();
-            while(level-->0){
                 Node curr=q.poll();
                 if(curr==null){
                     if(q.size()==0){
@@ -56,7 +54,6 @@ class Solution {
                 }
                 prev=curr; //change everytime prev to curr
             }
-        }
         return root;
     }
 }
