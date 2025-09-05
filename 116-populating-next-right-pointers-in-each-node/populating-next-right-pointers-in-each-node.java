@@ -1,0 +1,62 @@
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public Node left;
+    public Node right;
+    public Node next;
+
+    public Node() {}
+    
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, Node _left, Node _right, Node _next) {
+        val = _val;
+        left = _left;
+        right = _right;
+        next = _next;
+    }
+};
+*/
+
+class Solution {
+    public Node connect(Node root) {
+        if(root==null || root.left==null ){
+            return root;
+        }
+        Node prev=null; //to connect the prev to next node
+        Queue<Node> q=new LinkedList<>();
+        q.add(root);
+        q.add(null);
+        while(!q.isEmpty()){
+            int level=q.size();
+            while(level-->0){
+                Node curr=q.poll();
+                if(curr==null){
+                    if(q.size()==0){
+                        break;
+                    }
+                    else{
+                        q.add(null); //end of the current level add null pointer
+                    }
+                }
+                else{
+                    if(curr.left!=null){
+                        q.add(curr.left);
+                    }
+                    if(curr.right!=null){
+                        q.add(curr.right);
+                    }
+
+                    if(prev!=null){
+                        prev.next=curr; //updating the connection
+                    }
+                }
+                prev=curr; //change everytime prev to curr
+            }
+        }
+        return root;
+    }
+}
