@@ -16,12 +16,12 @@ class Solution {
             map.computeIfAbsent(curr.val,k->new ArrayList<>()).add(parent);
         }
         if(curr.left!=null){
-            map.computeIfAbsent(curr.val,k->new ArrayList<>()).add(curr.left.val);
+            map.computeIfAbsent(curr.val,k->new ArrayList<>()).add(curr.left.val); //[3-->1] ,[5-->6]
         }
         if(curr.right!=null){
-            map.computeIfAbsent(curr.val,k->new ArrayList<>()).add(curr.right.val);
+            map.computeIfAbsent(curr.val,k->new ArrayList<>()).add(curr.right.val);  //[3->1,5].[5->6,2]
         }
-        convertToGraph(curr.left,curr.val,map);
+        convertToGraph(curr.left,curr.val,map); //[5-->3] [6-->5]
         convertToGraph(curr.right,curr.val,map);
     }
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
@@ -34,8 +34,8 @@ class Solution {
         q.add(target.val);
         visited.add(target.val);
         while(!q.isEmpty()){
-            if(k==0){
-                break;
+             if(k==0){
+                break; //whye here needed why not below there where k-- written  if in starting k==0;
             }
             int n=q.size();
             while(n-->0){
