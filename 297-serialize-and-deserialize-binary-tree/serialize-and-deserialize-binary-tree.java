@@ -23,11 +23,12 @@ public class Codec {
                 res.append("n "); //add any delimeter and space
                 continue;
             }
-            res.append(curr.val).append(" ");
+            //..dont check if(curr.left!=null bcz we have to add all the nodes)
+            res.append(curr.val).append(" ");         
             q.add(curr.left);
             q.add(curr.right);
         }
-        System.out.print(res.toString());
+       // System.out.print(res.toString());
         return res.toString();
 
 
@@ -51,7 +52,7 @@ public class Codec {
                     parent.left=left;
                     q.add(left);
                 }
-                if(!values[++i].equals("n")){
+                if(!values[++i].equals("n")){ //
                     TreeNode right=new TreeNode(Integer.parseInt(values[i]));
                     parent.right=right;
                     q.add(right);
