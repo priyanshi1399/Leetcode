@@ -10,7 +10,7 @@ class Solution {
             }
         }
         return -1;       
-       /* int t=1;
+       /* int t=0;
         while(true){
             long val=(long)num1-t*(long)num2;
             if(val<0){
