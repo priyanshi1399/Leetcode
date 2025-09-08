@@ -14,22 +14,23 @@
  * }
  */
 class Solution {
-    int counter=0;
-    int kthSmallest=Integer.MAX_VALUE;
-    public void inorder(TreeNode root, int k){
+    int count=0;
+    public void solve(TreeNode root,int k,int [] kthSmallest){
         if(root==null){
             return;
         }
-        inorder(root.left, k);
-        counter++;
-        if(counter==k){
-            kthSmallest=root.val;
+        solve(root.left,k,kthSmallest);
+        count++;
+        if(count==k){
+            kthSmallest[0]=root.val;
         }
-        inorder(root.right, k);
+        solve(root.right,k,kthSmallest);
 
     }
     public int kthSmallest(TreeNode root, int k) {
-        inorder(root,k);
-        return kthSmallest;
+        int [] kthSmallest={0};
+
+        solve(root,k,kthSmallest);
+        return kthSmallest[0];
     }
 }
