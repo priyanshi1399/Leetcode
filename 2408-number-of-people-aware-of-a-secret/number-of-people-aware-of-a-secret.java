@@ -3,14 +3,21 @@ class Solution {
     public int peopleAwareOfSecret(int n, int delay, int forget) {
         int [] dp=new int[n+1];
         dp[1]=1; //for 1 people
+          long count=0;
         for(int day=2;day<=n;day++){
-            long count=0;
-            for(int prev=day-forget+1;prev<=day-delay;prev++){
-                if(prev>0){
-                count=(count+dp[prev])%mod;
-                }
+          //people who becomes eligible to share the secret
+            if(day-delay>0){
+            count=(count+dp[day-delay])%mod;
             }
+
+            //people who forget moving the window earlier
+            if(day-forget>0){
+                count=(count-dp[day-forget]+mod)%mod; //a-b%m =(a-b+mod)%mod
+            }
+
             dp[day]=(int)count;
+
+
         }
 
         //calculate the answer
