@@ -19,7 +19,7 @@ class Solution {
         for(int i=0;i<26;i++){
             if(indexArray[i]!=0){
                 int num=indexArray[i];
-                combined.append(String.valueOf((char)(i+'a')).repeat(num));
+                combined.append(String.valueOf((char)((26+i)%26)).repeat(num));
             }
         }
         return combined.toString();
