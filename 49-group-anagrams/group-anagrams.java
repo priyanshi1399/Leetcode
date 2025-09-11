@@ -2,7 +2,7 @@ class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> res=new ArrayList<>();
         HashMap<String,List<String>> map=new HashMap<>();
-        for(String word:strs){
+        for(String word:strs){ //traversing to the every String in strs array
             String sortedString=SortTheString(word);
             if(!map.containsKey(sortedString)){
                 //if its not in the list of keys
