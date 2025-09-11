@@ -11,15 +11,15 @@ class Solution {
         return new ArrayList<>(map.values());
     }
     private String getSortedString(String str){
-        int [] indexArray=new int[26];
+        int [] count=new int[26];
         for(int i=0;i<str.length();i++){
-            indexArray[str.charAt(i)-'a']++;
+            count[str.charAt(i)-'a']++;
         }
         StringBuilder combined=new StringBuilder();
         for(int i=0;i<26;i++){
-            if(indexArray[i]!=0){
-                int num=indexArray[i];
-                combined.append(String.valueOf((char)((26+i)%26)).repeat(num));
+            if(count[i]>0){
+                int num=count[i]; //denotes the num values how many times character got repeated
+                combined.append(String.valueOf((char)(i+'a')).repeat(num));
             }
         }
         return combined.toString();
