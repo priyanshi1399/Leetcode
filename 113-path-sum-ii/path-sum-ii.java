@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    public void backtrack (TreeNode root,List<List<Integer>> res, List<Integer> temp,int targetSum){
+    public void solve(TreeNode root,int targetSum,List<List<Integer>> res,List<Integer> temp){
         if(root==null){
             return;
         }
@@ -28,10 +28,9 @@ class Solution {
         }
 
         temp.add(root.val);
-        backtrack(root.left,res,temp,targetSum-root.val);
-        backtrack(root.right,res,temp,targetSum-root.val);
+        solve(root.left,targetSum-root.val,res,temp);
+        solve(root.right,targetSum-root.val,res,temp);
         temp.remove(temp.size()-1);
-
     }
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         List<List<Integer>> res=new ArrayList<>();
@@ -39,8 +38,7 @@ class Solution {
             return res;
         }
 
-        
-        backtrack(root,res,new ArrayList<>(),targetSum);
+        solve(root,targetSum,res,new ArrayList<>());
         return res;
     }
 }
