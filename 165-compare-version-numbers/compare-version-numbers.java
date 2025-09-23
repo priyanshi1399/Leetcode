@@ -1,7 +1,7 @@
 class Solution {
     public int compareVersion(String version1, String version2) {
-        String [] v1=version1.split("\\.");
-        String [] v2=version2.split("\\.");
+        String [] v1=version1.replaceAll("\\."," ").split(" ");
+        String [] v2=version2.replaceAll("\\."," ").split(" ");
 
         int i=0,j=0;
         int ans=0;
