@@ -22,7 +22,7 @@ class FoodRatings {
     HashMap<String,TreeSet<Pair<Integer,String>>> cuisineFoodratings;
     HashMap<String,Integer> foodRating;
     HashMap<String,String> foodCuisine; //to get the corresponding cuisine from food because need to change it
-    List<String> valuesFromCusisines;
+  
     
     public FoodRatings(String[] foods, String[] cuisines, int[] ratings) {
         this.food=foods;
