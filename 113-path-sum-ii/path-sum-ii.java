@@ -18,15 +18,15 @@ class Solution {
         if(root==null){
             return;
         }
+        temp.add(root.val);
         if(root.left==null && root.right==null){
-            if(root.val==targetSum){
-                temp.add(root.val);
-                res.add(new ArrayList<>(temp));
-                temp.remove(temp.size()-1);
+            if(targetSum==root.val){
+                res.add(new ArrayList<>(temp));                
             }
+            temp.remove(temp.size()-1);          
             return;
         }
-        temp.add(root.val);
+        
         solve(root.left,targetSum-root.val,temp,res);
         solve(root.right,targetSum-root.val,temp,res);
         temp.remove(temp.size()-1);
