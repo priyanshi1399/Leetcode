@@ -19,12 +19,10 @@ class Solution {
             return;
         }
         temp.add(root.val);
-        if(root.left==null && root.right==null){
-            if(targetSum==root.val){
+        if(root.left==null && root.right==null && targetSum==root.val){
                 res.add(new ArrayList<>(temp));                
-            }
-            temp.remove(temp.size()-1);          
-            return;
+                temp.remove(temp.size()-1);          
+                return;
         }
         
         solve(root.left,targetSum-root.val,temp,res);
