@@ -1,13 +1,15 @@
 class Solution {
     public int numWaterBottles(int numBottles, int numExchange) {
+        if(numExchange>numBottles){
+            return numBottles;
+        }
+        int bottle=numBottles;
         int sum=numBottles;
-        while((numBottles/numExchange)>0){
-           
-            int k=numBottles/numExchange;
-            int m=numBottles%numExchange;
-            sum=sum+k;
-            numBottles=k+m;
-
+        while(bottle>=numExchange){
+            int exchange=bottle/numExchange;
+            sum+=exchange;
+            
+            bottle=exchange+(bottle%numExchange);
         }
         return sum;
     }
