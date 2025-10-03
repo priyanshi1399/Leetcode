@@ -3,17 +3,12 @@ class Solution {
         int sum=numBottles;
         int emptyBottles=numBottles;
         numBottles=0;
-        while(emptyBottles>=numExchange || numBottles!=0){
-            if(emptyBottles<numExchange){
-                sum+=numBottles;
-                emptyBottles+=numBottles;
-                numBottles=0;
-            }
-            else{
+        while(emptyBottles>=numExchange){
+            
             emptyBottles=emptyBottles-numExchange;
+             sum++;
+             emptyBottles++;
             numExchange++;
-            numBottles++;
-            }
         }
         return sum;
 
