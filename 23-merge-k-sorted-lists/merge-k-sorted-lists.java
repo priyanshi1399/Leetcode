@@ -13,7 +13,7 @@ class Solution {
          if(lists.length==0 || lists==null){
             return null;
         }
-        PriorityQueue<ListNode> pq=new PriorityQueue<>(lists.length,(a,b)->Integer.compare(a.val,b.val));
+        PriorityQueue<ListNode> pq=new PriorityQueue<>((a,b)->Integer.compare(a.val,b.val));
        
         ListNode res=new ListNode(-1);
         ListNode tail=res;
