@@ -1,24 +1,23 @@
 class Solution {
     public int maxArea(int[] height) {
         int n=height.length;
-        int start=0;
-        int end=n-1;
-        int maxWater=0;
-        //take start and take end point
-        while(start<end){
+        int area=0;
+        int maxArea=0;
+        int i=0;
+        int j=n-1;
+        while(i<j){
+            int h=Math.min(height[i],height[j]);
+            int w=Math.abs(i-j);
+            area=h*w;
+            maxArea=Math.max(area,maxArea);
 
-            int width=end-start; //(width window)
-            int height_Building=Math.min(height[start],height[end]); //why min bcz water will contain till minimum height only        
-            maxWater=Math.max(maxWater,height_Building*width);
-
-            if(height[start]>height[end]){
-                end--; //start is greater we will keep that height to increase Area
+            if(height[i]<height[j]){
+                i++;
             }
             else{
-                start++; //end is greater so move start
+                j--;
             }
-
         }
-        return maxWater;
+        return maxArea;
     }
 }
