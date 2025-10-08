@@ -1,46 +1,60 @@
 class MinStack {
-    Stack<Integer> stck;
-    Stack<Integer> minStack;
+
+    Stack<Long> stck; 
+    List<Integer> list;
+    public void searchAndput(List<Integer> list,int val){
+        int l=0;
+        int r=list.size()-1;
+
+        while(l<=r){
+            int mid=l+(r-l)/2;
+            if(list.get(mid)==val){
+                list.add(mid-1,val);
+                return;
+            }
+            else if(list.get(mid)>val){
+                r=mid-1;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        list.add(l,val);
+    }
     public MinStack() {
         stck=new Stack<>();
-        minStack=new Stack<>();
+        list=new ArrayList<>();
     }
     
     public void push(int val) {
-        stck.push(val);
-        if(minStack.isEmpty()){
-            minStack.push(val);
+        stck.push((long)val);
+        if(list.isEmpty()){
+            list.add(val);
         }
-        else if(val<=minStack.peek()){
-            minStack.push(val);
+        else if(list.get(0)>=val){
+            list.add(0,val);
         }
-        
-
+        else if(list.get(list.size()-1)>=val){
+            list.add(val);
+        }
+        else{
+            searchAndput(list,val);
+        }
     }
     
     public void pop() {
-        if(!stck.isEmpty()){
-            int x=stck.peek();
-            stck.pop();
-            if(minStack.peek()==x){
-                minStack.pop();
-            }
-    }
+        long valueToPop=stck.peek();
+        stck.pop();
+        list.remove(Integer.valueOf((int)valueToPop));
     }
     
     public int top() {
-        if(!stck.isEmpty()){
-            return stck.peek();
-        }
-        return -1;
+            long top=stck.peek();
+            return (int) top;
     }
     
     public int getMin() {
-        if(!minStack.isEmpty()){
-            return minStack.peek();
-        }
-        return -1;
-        
+        return list.get(0);
     }
 }
 
