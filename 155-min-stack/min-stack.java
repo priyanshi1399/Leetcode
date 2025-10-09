@@ -1,60 +1,34 @@
 class MinStack {
 
-    Stack<Long> stck; 
-    List<Integer> list;
-    public void searchAndput(List<Integer> list,int val){
-        int l=0;
-        int r=list.size()-1;
-
-        while(l<=r){
-            int mid=l+(r-l)/2;
-            if(list.get(mid)==val){
-                list.add(mid-1,val);
-                return;
-            }
-            else if(list.get(mid)>val){
-                r=mid-1;
-            }
-            else{
-                l=mid+1;
-            }
-        }
-        list.add(l,val);
-    }
+    Stack<Integer> stck;
+    Stack<Integer> minStack;
     public MinStack() {
         stck=new Stack<>();
-        list=new ArrayList<>();
+        minStack=new Stack<>();
     }
     
     public void push(int val) {
-        stck.push((long)val);
-        if(list.isEmpty()){
-            list.add(val);
-        }
-        else if(list.get(0)>=val){
-            list.add(0,val);
-        }
-        else if(list.get(list.size()-1)>=val){
-            list.add(val);
+        stck.push(val);
+        if(minStack.isEmpty() || val<=minStack.peek()){
+            minStack.push(val);
         }
         else{
-            searchAndput(list,val);
+            minStack.push(minStack.peek());
         }
     }
     
     public void pop() {
-        long valueToPop=stck.peek();
         stck.pop();
-        list.remove(Integer.valueOf((int)valueToPop));
+        minStack.pop();
+        
     }
     
     public int top() {
-            long top=stck.peek();
-            return (int) top;
+        return stck.peek();
     }
     
     public int getMin() {
-        return list.get(0);
+        return minStack.peek();
     }
 }
 
