@@ -1,42 +1,23 @@
 class Solution {
     public int trap(int[] height) {
         int n=height.length;
-        int [] leftMax=new int[n];
-        leftMax[0]=height[0]; //left side maximum
-        for(int i=1;i<n;i++){
-            leftMax[i]=Math.max(leftMax[i-1],height[i]);
-        }
-
-        int [] rightMax=new int[n]; //right side maximum
-        rightMax[n-1]=height[n-1];
-        for(int i=n-2;i>=0;i--){
-            rightMax[i]=Math.max(rightMax[i+1],height[i]);
-        }
-        //water will fill in between leftMax & rightMax but within min of them
+        int left=0;
+        int right=n-1;
+        int leftMax=height[0];
+        int rightMax=height[n-1];
         int totalWater=0;
-        
-        for(int i=0;i<n;i++){
-            //water will be at the top of the building So we have to subtract the height of the building
-            totalWater+=Math.min(leftMax[i],rightMax[i])-height[i]; 
+        while(left<right){
+            if(leftMax<=rightMax){
+                totalWater+=leftMax-height[left];
+                left++;
+                leftMax=Math.max(leftMax,height[left]);
+            }
+            else{
+                   totalWater+=rightMax-height[right];
+                   right--;
+                   rightMax=Math.max(rightMax,height[right]);
+            }
         }
         return totalWater;
-
-
     }
 }
-
-
-//[0,1,1,2,2,2,2,3,3,3,3,3]
-//[3,3,3,3,3,3,3,3,2,2,2,1]
-
-/*
-[4,4,4,4,4,5]
-[5,5,5,5,5,5]
-
-[4,4,4,4,4,5]=>4-4=0+
-4-2=2 ->0+2=2
-4-0=4=2+4=6
-4-3=1+6=7
-4-2=2=>7+2=9
-5-5=0 9+0=9
-*/
