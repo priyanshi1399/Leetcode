@@ -13,21 +13,21 @@ class Solution {
         if(start>end){
             return null;
         }
-        if(start==end){
+        if(start==end){ //when one listNode left
             return lists[start];
         }
         int mid=start+(end-start)/2;
-        ListNode L1=partitionAndMergeList(start,mid,lists);
-        ListNode L2=partitionAndMergeList(mid+1,end,lists);
+        ListNode L1=partitionAndMergeList(start,mid,lists); //listNode 1
+        ListNode L2=partitionAndMergeList(mid+1,end,lists); //listNode 2
 
-        return mergeTwoSortedList(L1,L2);
+        return mergeTwoSortedList(L1,L2); //merging both the listNode 1 and listNode 2
     }
 
     public ListNode mergeTwoSortedList(ListNode l1,ListNode l2){
-        if(l1==null){
+        if(l1==null){ //if l1 becomes empty
             return l2;
         }
-        if(l2==null){
+        if(l2==null){ //if l2 becomes empty
             return l1;
         }
 
@@ -43,7 +43,7 @@ class Solution {
     }
     public ListNode mergeKLists(ListNode[] lists) {
         int k=lists.length;
-        if(k==0 || lists==null){
+        if(k==0 || lists==null){ //base case length is 0 or list is empty
             return null;
         }
 
