@@ -23,18 +23,20 @@ class Solution {
         if(node==null){
             return null;
         }
-        HashMap<Node,Node> map=new HashMap<>();
-        return dfs(node,map);
+        HashMap<Node,Node> graph=new HashMap<>();
+        return dfs(graph,node);
+
     }
-    public Node dfs(Node originalNode,HashMap<Node,Node> map){
-        if(map.containsKey(originalNode)){
-            return map.get(originalNode); //this will help to get neighbour as clone Node 
+    public Node dfs(HashMap<Node,Node> graph, Node originalNode){
+        if(graph.containsKey(originalNode)){
+            return graph.get(originalNode);
         }
+
         Node cloneNode=new Node(originalNode.val);
-        map.put(originalNode,cloneNode); //making the clone node like 1->1'
+        graph.put(originalNode,cloneNode);
         for(Node n:originalNode.neighbors){
-            cloneNode.neighbors.add(dfs(n,map));
+            cloneNode.neighbors.add(dfs(graph,n));
         }
-        return cloneNode; 
-}
+        return cloneNode;
+    }
 }
