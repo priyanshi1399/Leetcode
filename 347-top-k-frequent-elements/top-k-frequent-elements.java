@@ -6,12 +6,7 @@ class Solution {
             map.put(nums[i],map.getOrDefault(nums[i],0)+1);
         }
 
-        PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->{
-            int val1=a[0];
-            int val2=b[0];
-
-            return val1==val2?Integer.compare(a[1],b[1]):Integer.compare(val2,val1);
-        });
+        PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->Integer.compare(b[0],a[0]));
 
         for(Map.Entry<Integer,Integer> entry:map.entrySet()){
             int freq=entry.getValue();
