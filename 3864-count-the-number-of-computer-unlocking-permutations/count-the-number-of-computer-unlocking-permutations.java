@@ -1,6 +1,6 @@
 class Solution {
     private final int mod=1_000_000_007;
-    public long calFact(long n){
+    public long calFact(int n){
         if(n==0 ){
             return 0;
         }
@@ -17,7 +17,7 @@ class Solution {
                 return 0;
             }
         }
-        int ans=(int)calFact((long)n-1);
+        int ans=(int)calFact(n-1);
         return ans;
     }
 }
