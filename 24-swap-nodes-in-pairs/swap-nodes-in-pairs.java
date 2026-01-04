@@ -15,10 +15,10 @@ class Solution {
         prev.next=head;
             ListNode curr=head;
             while(curr!=null && curr.next!=null){
-                ListNode f=curr.next;
-                curr.next=f.next;
-                f.next=curr;
-                prev.next=f;
+                ListNode n=curr.next;
+                curr.next=n.next;
+                n.next=curr;
+                prev.next=n;
                 prev=curr;
                 curr=curr.next;
 
