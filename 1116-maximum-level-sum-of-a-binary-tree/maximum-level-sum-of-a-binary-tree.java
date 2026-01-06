@@ -24,11 +24,11 @@ class Solution {
         int maxSum=Integer.MIN_VALUE;
         int level=0;
         while(!q.isEmpty()){
-            List<Integer> list=new ArrayList<>();
+            int sum=0;
             int n=q.size();
             while(n-->0){
             TreeNode temp=q.poll();
-            list.add(temp.val);
+            sum+=temp.val;
                 if(temp.left!=null){
                     q.add(temp.left);
                 }
@@ -36,11 +36,7 @@ class Solution {
                     q.add(temp.right);
                 }
             }
-            int sum=0;
             level++;
-            for(int i=0;i<list.size();i++){
-                sum+=list.get(i);
-            }
             if(sum>maxSum){
                 ans=level;
                 maxSum=sum;
