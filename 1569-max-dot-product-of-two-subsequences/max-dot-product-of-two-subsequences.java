@@ -3,9 +3,9 @@ class Solution {
     int n;
     public int solve(int [] nums1,int [] nums2,int i,int j,int [][] dp){
         if(i>=m || j>=n){
-            return -100000000; //why min_value because if we return 0 for out of bound it will give 0 as max which is wrong
+            return -1000000000; //why min_value because if we return 0 for out of bound it will give 0 as max which is wrong
         }
-        if(dp[i][j]!=-100000000){
+        if(dp[i][j]!=-1000000000){
             return dp[i][j];
         }
         int take_i_j=nums1[i]*nums2[j];
@@ -23,7 +23,7 @@ class Solution {
         n=nums2.length;
         int [][] dp=new int[501][501];
         for(int i=0;i<501;i++){
-            Arrays.fill(dp[i],-100000000);
+            Arrays.fill(dp[i],-1000000000);
         }
      
         return solve(nums1,nums2,0,0,dp);
