@@ -3,21 +3,17 @@ class Solution {
         int m=points.length;
         int count=0;
         for(int i=0;i<m-1;i++){
-            int start_ith=points[i][0];
-            int end_ith=points[i][1];
+            int x1=points[i][0];
+            int y1=points[i][1];
 
-            int start_jth=points[i+1][0];
-            int end_jth=points[i+1][1];
+            int x2=points[i+1][0];
+            int y2=points[i+1][1];
 
-            int startVal=(start_jth-start_ith)<0?(-1)*(start_jth-start_ith):(start_jth-start_ith);
-            int endVal=(end_jth-end_ith)<0?(-1)*(end_jth-end_ith):(end_jth-end_ith);
+            int dx=Math.abs(x1-x2);
+            int dy=Math.abs(y1-y2);
           
-            int maxVal=Math.max(startVal,endVal);
+            int maxVal=Math.max(dx,dy);
             
-            if(maxVal<0){
-                maxVal=maxVal*(-1);
-            }
-
             count+=maxVal;
             
             
