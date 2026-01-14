@@ -1,1 +1,1 @@
-<h2>minimum-time-visiting-all-points Notes</h2><hr>[ Time taken: 43 m 2 s ]
+<h2>minimum-time-visiting-all-points Notes</h2><hr>[ Time taken: 9 hrs 6 m 57 s ]
