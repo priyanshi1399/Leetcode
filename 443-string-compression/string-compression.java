@@ -4,13 +4,13 @@ class Solution {
         int i=0;
         int idx=0;
         while(i<n){
-            char curr_char=chars[i];
+            char currChar=chars[i];
             int count=0;
-            while(i<n && chars[i]==curr_char){
+            while(i<n && chars[i]==currChar){
                 count++;
                 i++;
             }
-            chars[idx]=curr_char;
+            chars[idx]=currChar;
             idx++;
             if(count>1){
             String count_Val=String.valueOf(count); //12 length=2
