@@ -13,13 +13,17 @@ class Solution {
         if(head==null || head.next==null){
             return head;
         }
-        ListNode newHead=reverseList(head.next); //2->3->4->5
+        ListNode prev=null;
+        ListNode curr=head;
+        ListNode n=null;
+        while(curr!=null){
+            n=curr.next;          
+           curr.next=prev;
+           prev=curr;
+           curr=n;
 
-        ListNode front=head.next; //solving for very small ;  returns 5
+        }
+        return prev;
 
-        front.next=head; // 4->5  front is 5 5.next->4 
-        head.next=null; //4.next=null;
-
-        return newHead; //return 5
     }
 }
