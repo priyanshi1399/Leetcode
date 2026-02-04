@@ -21,6 +21,9 @@ class Solution {
             } 
             i++;  
         }
+        if(isIncresing==true){
+            return false;
+        }
          while(i<n-1){
             if(nums[i]>nums[i+1]){
                 IsDecreasing=true;
@@ -31,9 +34,6 @@ class Solution {
                    
             } 
             i++;  
-        }
-        if(i==n-1){
-                return false;
         }
         
          while(i<n-1){
@@ -46,7 +46,7 @@ class Solution {
             } 
             i++;  
         }
-        if(i==n-1){
+        if(i==n-1 && isIncresing==true && IsDecreasing==false){
                 return true;
         }
         return false;
