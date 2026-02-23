@@ -11,7 +11,7 @@ class Solution {
                 prevBit=currBit;
             }
             currBit++;
-            n>>=1; //0 will be appended 0 leftside 
+            n=n>>1; //0 will be appended 0 leftside 
         }
         return maxDist;
     }
