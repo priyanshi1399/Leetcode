@@ -1,24 +1,17 @@
 class Solution {
     public int binaryGap(int n) {
-        String binary=Integer.toBinaryString(n);
-        System.out.println(binary);
-        int len=binary.length();
-        int countOne=0;
+        //there can be max 20 bits 2^10~1024 ->(10^3 )^3 ->(2^10)^3
+        int currBit=0;
+        int prevBit=-1;
         int maxDist=0;
-        int j=0;
-        int prevIndex=0;
-        for(int i=0;i<len;i++){
-            char ch=binary.charAt(i);
-            if(ch=='1'){
-                prevIndex=j;
-                j=i;
-                countOne++;
+        while(n>0){
+            if((n&1)>0){
+                
+                maxDist=prevBit!=-1?Math.max(maxDist,currBit-prevBit):maxDist;
+                prevBit=currBit;
             }
-            if(countOne<=3){
-                maxDist=Math.max(maxDist,j-prevIndex);
-                countOne=0;
-            }
-            
+            currBit++;
+            n>>=1; //0 will be appended 0 leftside 
         }
         return maxDist;
     }
