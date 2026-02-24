@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    int curr=0;
+    
     public int solve(TreeNode root, int curr){
 
         if(root==null){
@@ -31,6 +31,7 @@ class Solution {
         return left+right;
     }
     public int sumRootToLeaf(TreeNode root) {
+        int curr=0;
         return solve(root,curr);
         
 
