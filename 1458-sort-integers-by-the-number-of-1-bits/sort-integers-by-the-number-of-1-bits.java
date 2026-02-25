@@ -17,11 +17,6 @@ class Solution {
             }
         });
 
-         for(int i=0;i<result.length;i++){
-            System.out.println(result[i][0] + " :"+result[i][1]);
-            
-        }
-
         for(int i=0;i<result.length;i++){
             arr[i]=result[i][0];
         }
