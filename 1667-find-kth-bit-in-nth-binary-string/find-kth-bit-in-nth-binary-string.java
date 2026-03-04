@@ -6,12 +6,7 @@ class Solution {
             StringBuilder prevStr=new StringBuilder(str);
             for(int j=0;j<prevStr.length();j++){
                 char ch=prevStr.charAt(j);
-                if(ch=='0'){
-                    prevStr.setCharAt(j,'1');
-                }
-                else{
-                   prevStr.setCharAt(j,'0');
-                }
+                prevStr.setCharAt(j,(char)(ch ^ 1));
             }
             // System.out.println("string is"+str.toString());
           str=str.append("1").append(prevStr.reverse());
