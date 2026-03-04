@@ -1,20 +1,20 @@
 class Solution {
     public char findKthBit(int n, int k) {
-        StringBuilder str=new StringBuilder();
-        str.append("0");
-        for(int i=1;i<=n;i++){
-            StringBuilder prevStr=new StringBuilder(str);
-            for(int j=0;j<prevStr.length();j++){
-                char ch=prevStr.charAt(j);
-                prevStr.setCharAt(j,(char)(ch ^ 1));
-            }
-            // System.out.println("string is"+str.toString());
-          str=str.append("1").append(prevStr.reverse());
-          //System.out.println(str.toString());
-        }
+    if(n==1){
+        return '0';
+    }
+      int length=(1<<n)-1; //2^n-1
 
-     
-            return str.charAt(k-1);
+      if(k<Math.ceil(length/2.0)){
+            return findKthBit(n-1,k);
+      }
+      else if(k==Math.ceil(length/2.0)){
+        return '1';
+      }
+      else{
+        char ch=findKthBit(n-1,length-(k-1)); //handle reversed
+        return ch=='0'? '1':'0';
+      }
         
     }
 }
