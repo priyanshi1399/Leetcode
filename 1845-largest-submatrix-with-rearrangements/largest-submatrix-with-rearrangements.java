@@ -1,30 +1,57 @@
+class Pair<K,V>{
+    private K key;
+    private V value;
+
+    public Pair(K key,V value){
+        this.key=key;
+        this.value=value;
+    }
+
+    public K getKey(){
+        return key;
+    }
+    public V getValue(){
+        return value;
+    }
+}
 class Solution {
     public int largestSubmatrix(int[][] matrix) {
         int m=matrix.length;
         int n=matrix[0].length;
-        int maxArea=0;
-        int [] prevRow=new int[n];
+        int result=0;
+        List<Pair<Integer,Integer>> prevHeights=new ArrayList<>();
+
         for(int row=0;row<m;row++){
-            int [] currRow=matrix[row].clone();
-            for(int col=0;col<n;col++){
-                if(currRow[col]==1){
-                    currRow[col]+=prevRow[col]; //adding consecutive 1s
+            List<Pair<Integer,Integer>> Heights=new ArrayList<>();
+            boolean [] seen =new boolean[n];
+
+            for(Pair<Integer,Integer> p: prevHeights){
+                int height=p.getKey();
+                int col=p.getValue();
+
+                if(matrix[row][col]==1){
+                    Heights.add(new Pair<Integer,Integer>(height+1,col));
+                    seen[col]=true;
                 }
             }
 
-            //now sort the rows in descending order
-            int [] sortedRow=currRow.clone(); //exactly copying the rows
-            //sorting in ascending
-            Arrays.sort(sortedRow);
+            //check whatever is left now in col which yiu ahve not seen
+            for(int col=0;col<n;col++){
+                if(!seen[col] && matrix[row][col]==1){
+                    Heights.add(new Pair<Integer,Integer>(1,col));
+                    seen[col]=true;
+                }
+            }
 
-        //calculating Area
-        for(int i=0;i<n;i++){
-            int width=n-i; //box base will be like i=0base 1 i=1 base 2 but we have our array in descending so n-i;
-            int height=sortedRow[i];
-            maxArea=Math.max(maxArea,width*height);
+            //calculate the ARea
+             for(int i=0;i<Heights.size();i++){
+                int base=i+1;
+                int height=Heights.get(i).getKey();
+                result=Math.max(result,base*height);
         }
-            prevRow=currRow ;// assigning prevRow to currRow
-        }
-        return maxArea;
+        
+        prevHeights=Heights;
     }
+    return result;
+}
 }
