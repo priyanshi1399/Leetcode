@@ -1,21 +1,19 @@
 class Solution {
-    public int convertToSingleDigit(int number){
-        int sum=0;
-        while(number>0){
-            int rem=number%10;
-            sum+=rem;
-            number=number/10;
-        }
-        return sum;
+    int minVal=100001;
+    public int digitSum(int n){
+        return (n/10000)
+        +(n%10000/1000)
+        +(n%1000/100)
+        +(n%100/10)+n%10;
     }
     public int minElement(int[] nums) {
-        int n=nums.length;
-        int minValue=100000;
-        int sum=0;
-        for(int i=0;i<n;i++){
-            sum=convertToSingleDigit(nums[i]);
-            minValue=Math.min(minValue,sum);
+        int len=nums.length;
+        for(int i=0;i<len;i++){
+        int n=nums[i];
+        int singleNum=digitSum(n);
+        minVal=Math.min(minVal,singleNum);
         }
-        return minValue;
+        return minVal;
     }
+    
 }
