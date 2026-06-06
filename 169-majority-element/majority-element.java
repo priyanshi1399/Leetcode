@@ -1,21 +1,20 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        int n=nums.length;
+        Integer majorityElement=null;
         int count=0;
-        Integer majEle=null;
-
+        int n=nums.length;
         for(int i=0;i<n;i++){
-            if(majEle!=null && nums[i]==majEle){ //if it is the same element
-                    count++;
+            if(majorityElement!=null && majorityElement==nums[i]){
+                count++;
             }
             else if(count==0){
-                majEle=nums[i]; //assign to that number
+                majorityElement=nums[i];
                 count=1;
             }
-            else {
+            else{
                 count--;
             }
         }
-        return majEle;
+        return majorityElement;
     }
 }
