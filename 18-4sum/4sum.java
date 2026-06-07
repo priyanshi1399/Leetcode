@@ -29,12 +29,12 @@ class Solution {
                         k++;
                     }
                 }
-                while(j+1<n && nums[j]==nums[j+1]){
+                while(j+1<=n-3 && nums[j]==nums[j+1]){
                         j++;
                 }
             }
 
-                while(i+1<n-1 && nums[i]==nums[i+1]){
+                while(i+1<=n-4 && nums[i]==nums[i+1]){
                         i++;
                 }
 
